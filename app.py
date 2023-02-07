@@ -14,16 +14,19 @@ def home(uploaded_file):
         st.header('To begin please upload a file')
 
 
+# TODO
 def data_summary():
     st.header('Statistics of Dataframe')
     st.write(df.describe())
 
 
+# TODO
 def data_header():
     st.header('Header of Dataframe')
     st.write(df.head())
 
 
+# TODO
 def displayplot():
     st.header('Plot of Data')
 
@@ -35,6 +38,7 @@ def displayplot():
     st.pyplot(fig)
 
 
+# TODO
 def interactive_plot():
     col1, col2 = st.columns(2)
 
