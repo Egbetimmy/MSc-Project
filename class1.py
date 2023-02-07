@@ -34,8 +34,8 @@ class volumetrics:
 
     def pore_volume(self):
         pore_volume = []
-        for net_volume, ntg in zip(self.net_volume, self.ntg):
-            pore = net_volume * ntg
+        for net_volume, porosity in zip(self.net_volume, self.porosity):
+            pore = net_volume * porosity
             pore_volume.append(pore)
 
         self.pore_volume = pore_volume
@@ -44,37 +44,25 @@ class volumetrics:
 
     def hydrocarbon_pore_volume(self):
         hydrocarbon_pore_volume = []
-        for pore_volume, ntg in zip(self.pore_volume, self.ntg):
-            bulk = pore_volume * ntg
+        for pore_volume, Hsaturation in zip(self.pore_volume, self.Hsaturation):
+            bulk = pore_volume * Hsaturation
             hydrocarbon_pore_volume.append(bulk)
 
         self.hydrocarbon_pore_volume = hydrocarbon_pore_volume
         self.df['Hydrocarbon Pore Volume'] = self.hydrocarbon_pore_volume
         return self.df
 
-    def oiip(self):
-        """
-        calculate oiip
-        """
-        pass
+    def calculate_oiip(self, net_pay, initial_oil_saturation):
+        oiip = self.porosity * net_pay * initial_oil_saturation * 7758
+        return oiip
 
-    def giip(self):
-        """
-        calculate giip
-        """
-        pass
+    def calculate_giip(self, net_pay, initial_gas_saturation):
+        giip = self.porosity * net_pay * initial_gas_saturation * 43560
+        return giip
 
-    def stoiip(self):
-        """
-        calculate stoiip
-        """
-        pass
-
-    def stgiip(self):
-        """
-        calculate stgiip
-        """
-        pass
+    def calculate_stoiip(self, net_pay, initial_oil_saturation):
+        stoiip = self.porosity * net_pay * initial_oil_saturation
+        return stoiip
 
     """
     need to create a function to plot for proper visualization

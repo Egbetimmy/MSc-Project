@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import pandas as pd
+
 # %matplotlib inline
 
 
@@ -34,38 +34,6 @@ class Anisotropy:
         # self.correction = correction
         self.df['Anistropy_correction'] = correction
         return self.df
-
-    def read_data_file(self, file_name, sample=True):
-
-        """Method to read in data from a txt file. The txt file should have
-        one number (float) per line. The numbers are stored in the data attribute.
-        After reading in the file, the mean and standard deviation are calculated
-
-        Args:
-            file_name (string): name of a file to read from
-
-        Returns:
-            None
-
-        """
-        # TODO: this part of the code is not working
-        # This code opens a data file and appends the data to a list called data_list
-        data = pd.read_csv(file_name)
-
-        # Select first Column
-        self.seismic_data = self.df[self.df.columns[0]]
-        self.well_data = self.df[self.df.columns[1]]
-
-        # TODO:
-        #   Update the self.data attribute with the data_list
-        #   Update self.mean with the mean of the data_list.
-        #       You can use the calculate_mean() method with self.calculate_mean()
-        #   Update self.stdev with the standard deviation of the data_list. Use the
-        #       calcaulte_stdev() method.
-        # self.data = data_list
-
-        self.thomsen = self.thomsen_delta()
-        self.stdev = self.calculate_stdev(sample)
 
     def plot_data(self, n_spaces=50):
 
