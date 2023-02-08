@@ -65,7 +65,26 @@ class petrophysics:
         self.df['velocity'] = 1000000 / self.sonic
         return self.df
 
-    def ro(formation_factor, rw):
+    def formation_factor(self, arch_a, arch_m):
+        """
+        Computes Archie Formation Factor (F)
+        Parameters
+        ----------
+        arch_a : float
+            Archie Tortuosity Factor - a
+        phi : [type]
+            Porosity (decimal)
+        arch_m : float
+            Archie Cementation Exponent - m
+        Returns
+        -------
+        float
+            Returns Archie Formation Factor
+        """
+        self.df['formation_factor'] = arch_a / (self.porosity ** arch_m)
+        return self.df
+
+    def ro(self, formation_factor, rw):
         """
         Archie Ro - Resistivity of water saturation formation (ohm.m)
         Parameters
@@ -79,4 +98,15 @@ class petrophysics:
         float
             Returns resistivity of water saturation formation (ohm.m)
         """
-        return formation_factor * rw
+        ro = formation_factor * rw
+        return ro
+
+    def swirr(self, formation_factor):
+        swirr = (formation_factor / 2000) ** (1/2)
+
+        return swirr
+
+    def permeability(self, swirr):
+        permeability = 307 + (26552 * (self.porosity ** 2)) - (3450 * (self.porosity * swirr)**2)
+
+        return permeability
