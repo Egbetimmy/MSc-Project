@@ -105,6 +105,8 @@ class petrophysics:
         swirr = (formation_factor / 2000) ** (1/2)
 
         return swirr
+    # nothing
+
 
     def permeability(self, swirr):
         permeability = 307 + (26552 * (self.porosity ** 2)) - (3450 * (self.porosity * swirr)**2)
