@@ -37,7 +37,11 @@ class petrophysics:
 
     def slowness_to_velocity(self):
         sonic = self.df[self.df.columns[4]]
-        self.df['velocity'] = 1000000 / sonic
+        velocity = []
+        for vel in sonic:
+            son = 1000000 / vel
+            velocity.append(son)
+        self.df['velocity'] = velocity
         return self.df
 
     def formation_factor(self, arch_a, arch_m):
