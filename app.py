@@ -59,7 +59,7 @@ upload_file = st.sidebar.file_uploader('Upload a file containing earthquake data
 # Sidebar navigation
 st.sidebar.title('Navigation')
 options = st.sidebar.radio('Select what you want to display:',
-                           ['Home', 'Data Summary', 'Data Header', 'Scatter Plot', 'Fancy Plots'])
+                           ['Home', 'Data Summary', 'Data Header', 'Data Plot', 'Fancy Plots'])
 
 # Check if file has been uploaded
 if upload_file is not None:
@@ -72,7 +72,7 @@ elif options == 'Data Summary':
     data_summary()
 elif options == 'Data Header':
     data_header()
-elif options == 'Scatter Plot':
+elif options == 'Data Plot':
     displayplot()
 elif options == 'Interactive Plots':
     interactive_plot()

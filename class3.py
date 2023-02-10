@@ -17,8 +17,7 @@ class Anisotropy:
             thomsen_anisotropy = ((well / seismic) - 1)
 
             thomsen_delta.append(thomsen_anisotropy)
-        self.thomsen_delta = thomsen_delta
-        self.df['Thomsen_delta'] = self.thomsen_delta
+        self.df['Thomsen_delta'] = thomsen_delta
         return self.df
 
     def correction(self):
@@ -26,12 +25,12 @@ class Anisotropy:
         # TODO: review the code to optimize it
         self.seismic_data = self.df[self.df.columns[1]]
         self.well_data = self.df[self.df.columns[2]]
+        thomsen_delta = self.df['Thomsen_delta']
         correction = []
-        for delta, seismic in zip(self.thomsen_delta, self.seismic_data):
+        for delta, seismic in zip(thomsen_delta, self.seismic_data):
             anisotropy_correction = ((1 - delta) * seismic)
 
             correction.append(anisotropy_correction)
-        # self.correction = correction
         self.df['Anistropy_correction'] = correction
         return self.df
 
