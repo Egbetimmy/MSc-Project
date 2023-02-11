@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 
-# %matplotlib inline
 
+# %matplotlib inline
+# TODO: add a proper documetation
+# TODO: review the code to optimize it
 
 class Anisotropy:
     def __init__(self, df):
@@ -10,8 +12,6 @@ class Anisotropy:
         self.well_data = self.df[self.df.columns[2]]
 
     def thomsen_delta(self):
-        # TODO: add a proper documetation
-        # TODO: review the code to optimize it
         thomsen_delta = []
         for well, seismic in zip(self.well_data, self.seismic_data):
             thomsen_anisotropy = ((well / seismic) - 1)
@@ -21,8 +21,6 @@ class Anisotropy:
         return self.df
 
     def correction(self):
-        # TODO: add a proper documetation
-        # TODO: review the code to optimize it
         self.seismic_data = self.df[self.df.columns[1]]
         self.well_data = self.df[self.df.columns[2]]
         thomsen_delta = self.df['Thomsen_delta']
@@ -35,26 +33,6 @@ class Anisotropy:
         return self.df
 
     def plot_data(self, n_spaces=50):
-
-        """Method to plot the normalized histogram of the data and a plot of the
-        probability density function along the same range
-
-        Args:
-            n_spaces (int): number of data points
-
-        Returns:
-            list: x values for the pdf plot
-            list: y values for the pdf plot
-
-        """
-        # mapping = {self.df.columns[0]: "Horizons",self.df.columns[1]: "Well_data",self.df.columns[2]: "Seismic_data",\
-        # self.df.columns[3]: "Error", self.df.columns[4]: "Correction"}
-
-        # self.df = self.df.rename(columns=mapping)
-
-        # TODO: Nothing to do for this method. Try it out and see how it works.
-        # TODO: Try to change the data columns in use to call the data from column name
-
         data_frame = self.df
 
         fig, axes = plt.subplots(figsize=(10, 10))
