@@ -38,18 +38,29 @@ def data_header():
     st.write(x)
     st.write(y)
     z = test.plot_data()
+    st.pyplot(z)
 
 
 # TODO
 def displayplot():
-    st.header('Plot of Data')
+    test = Volumetrics(df)
+    x = test.bulk_volume()
+    st.header('Header of Dataframe')
+    st.write(df.head())
+    st.write(x)
 
-    fig, ax = plt.subplots(1, 1)
-    ax.scatter(x=df['Depth'], y=df['Magnitude'])
-    ax.set_xlabel('Depth')
-    ax.set_ylabel('Magnitude')
 
-    st.pyplot(fig)
+# TODO
+def displayplot():
+    test = Anisotropy(df)
+    x = test.thomsen_delta()
+    y = test.correction()
+    st.header('Header of Dataframe')
+    st.write(df.head())
+    st.write(x)
+    st.write(y)
+    z = test.plot_data()
+    st.pyplot(z)
 
 
 # TODO
