@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 
 # %matplotlib inline
-class petrophysics:
+class Petrophysics:
     """
         Need to test the outcomes
         """

@@ -1,4 +1,4 @@
-class volumetrics:
+class Volumetrics:
     """
     Need to test the outcomes
     """

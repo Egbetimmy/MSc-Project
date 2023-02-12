@@ -2,6 +2,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 import plotly.express as px
+from class1 import Volumetrics
+from class2 import Petrophysics
+from class3 import Anisotropy
 
 st.set_page_config(layout="wide")
 
