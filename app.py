@@ -19,14 +19,25 @@ def home(uploaded_file):
 
 # TODO
 def data_summary():
+    area = input()
+    fvf = input()
+    test = Volumetrics(df, area, fvf)
+    x = test.bulk_volume()
     st.header('Statistics of Dataframe')
     st.write(df.describe())
+    st.write(x)
 
 
 # TODO
 def data_header():
+    test = Anisotropy(df)
+    x = test.thomsen_delta()
+    y = test.correction()
     st.header('Header of Dataframe')
     st.write(df.head())
+    st.write(x)
+    st.write(y)
+    z = test.plot_data()
 
 
 # TODO
