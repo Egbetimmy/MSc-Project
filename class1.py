@@ -8,9 +8,9 @@ class Volumetrics:
         self.area = area
         self.fvf = fvf
 
-    def bulk_volume(self):
+    def bulk_volume(self, x):
         bulk_volume = []
-        thickness = self.df[self.df.columns[1]]
+        thickness = self.df[self.df.columns[x]]
         for thick in thickness:
             bulk = thick * self.area
             bulk_volume.append(bulk)
@@ -18,8 +18,8 @@ class Volumetrics:
         self.df['Bulk Volume'] = self.bulk_volume
         return self.df
 
-    def net_volume(self):
-        net_to_gross = self.df[self.df.columns[2]]
+    def net_volume(self, x):
+        net_to_gross = self.df[self.df.columns[x]]
         net_volume = []
         for bulk_volume, ntg in zip(self.bulk_volume, net_to_gross):
             net = bulk_volume * ntg
@@ -28,8 +28,8 @@ class Volumetrics:
         self.df['Net Volume'] = self.net_volume
         return self.df
 
-    def pore_volume(self):
-        porosity = self.df[self.df.columns[3]]
+    def pore_volume(self, x):
+        porosity = self.df[self.df.columns[x]]
         pore_volume = []
         for net_volume, por in zip(self.net_volume, porosity):
             pore = net_volume * por
@@ -38,8 +38,8 @@ class Volumetrics:
         self.df['Pore Volume'] = self.pore_volume
         return self.df
 
-    def hydrocarbon_pore_volume(self):
-        Hsaturation = self.df[self.df.columns[4]]
+    def hydrocarbon_pore_volume(self, x):
+        Hsaturation = self.df[self.df.columns[x]]
         hydrocarbon_pore_volume = []
         for pore_volume, Hsh in zip(self.pore_volume, Hsaturation):
             bulk = pore_volume * Hsh
@@ -48,10 +48,10 @@ class Volumetrics:
         self.df['Hydrocarbon Pore Volume'] = self.hydrocarbon_pore_volume
         return self.df
 
-    def calculate_oiip(self):
-        porosity = self.df[self.df.columns[3]]
-        net_pay = self.df[self.df.columns[2]]
-        Hsaturation = self.df[self.df.columns[4]]
+    def calculate_oiip(self, x, y, z):
+        net_pay = self.df[self.df.columns[x]]
+        porosity = self.df[self.df.columns[y]]
+        Hsaturation = self.df[self.df.columns[z]]
         oil = []
         for por, ntg, Hsh in zip(porosity, net_pay, Hsaturation):
             x = por * ntg * Hsh * 7758
@@ -59,10 +59,10 @@ class Volumetrics:
         self.df['oiip'] = oil
         return self.df
 
-    def calculate_giip(self):
-        porosity = self.df[self.df.columns[3]]
-        net_pay = self.df[self.df.columns[2]]
-        Hsaturation = self.df[self.df.columns[4]]
+    def calculate_giip(self, x, y, z):
+        net_pay = self.df[self.df.columns[x]]
+        porosity = self.df[self.df.columns[y]]
+        Hsaturation = self.df[self.df.columns[z]]
         gas = []
         for por, ntg, Hsh in zip(porosity, net_pay, Hsaturation):
             x = por * ntg * Hsh * 43560
@@ -70,10 +70,10 @@ class Volumetrics:
         self.df['giip'] = gas
         return self.df
 
-    def calculate_stoiip(self):
-        porosity = self.df[self.df.columns[3]]
-        net_pay = self.df[self.df.columns[2]]
-        Hsaturation = self.df[self.df.columns[4]]
+    def calculate_stoiip(self, x, y, z):
+        net_pay = self.df[self.df.columns[x]]
+        porosity = self.df[self.df.columns[y]]
+        Hsaturation = self.df[self.df.columns[z]]
         HC = []
         for por, ntg, Hsh in zip(porosity, net_pay, Hsaturation):
             Hsat = por * net_pay * Hsh

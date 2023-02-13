@@ -8,24 +8,23 @@ import matplotlib.pyplot as plt
 class Anisotropy:
     def __init__(self, df):
         self.df = df
-        self.seismic_data = self.df[self.df.columns[1]]
-        self.well_data = self.df[self.df.columns[2]]
 
-    def thomsen_delta(self):
+    def thomsen_delta(self, x, y):
+        seismic_data = self.df[self.df.columns[x]]
+        well_data = self.df[self.df.columns[y]]
         thomsen_delta = []
-        for well, seismic in zip(self.well_data, self.seismic_data):
+        for well, seismic in zip(well_data, seismic_data):
             thomsen_anisotropy = ((well / seismic) - 1)
 
             thomsen_delta.append(thomsen_anisotropy)
         self.df['Thomsen_delta'] = thomsen_delta
         return self.df
 
-    def correction(self):
-        self.seismic_data = self.df[self.df.columns[1]]
-        self.well_data = self.df[self.df.columns[2]]
+    def correction(self, x):
+        seismic_data = self.df[self.df.columns[x]]
         thomsen_delta = self.df['Thomsen_delta']
         correction = []
-        for delta, seismic in zip(thomsen_delta, self.seismic_data):
+        for delta, seismic in zip(thomsen_delta, seismic_data):
             anisotropy_correction = ((1 - delta) * seismic)
 
             correction.append(anisotropy_correction)
