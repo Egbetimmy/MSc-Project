@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 # %matplotlib inline
@@ -221,3 +222,8 @@ class Petrophysics:
             ax.spines["top"].set_position(("axes", 1.02))
 
         return plt.tight_layout()
+
+
+def rename(df):
+    mapping = {df.columns[0]: 'new0', df.columns[1]: 'new1'}
+    su = df.rename(columns=mapping)
