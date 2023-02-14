@@ -1,0 +1,113 @@
+well,form,sample,core,orient,depth,log depth,tvdss,rho_g,rho_b,rho_fl,fluid,mud,description,,por_1000,ka_1000,kb_1000
+Freeman-4,690,1**,1,,8272.20,8282.20,8198.12,2.62,2.301,,oil,obm,"shly sst, dk gry, vf gr, wl srt, arg, consol, wl cmt",,19.3,3.30,
+Freeman-4,690,2**,1,,8274.30,8284.30,8200.12,2.61,2.297,,oil,obm,"shly sst, dk gry, vf gr, wl srt, arg, org carb, consol, wl cmt",,18.4,2.00,
+Freeman-4,690,3,2,,8327.45,8340.45,8256.09,2.65,2.176,,oil,obm,"Sst, brn-gry, vf gr, wl srt, sli shly, arg, org carb lam, pr cmt",,32.5,590.00,307.00
+Freeman-4,690,4,2,,8327.90,8340.90,8256.59,2.65,2.138,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, sli shly, arg, org carb lam, pr cmt",,32.9,1050.00,652.00
+Freeman-4,690,5,2,,8328.75,8341.75,8257.59,2.63,2.077,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, pr cmt",,36.7,2610.00,800.00
+Freeman-4,690,6,2,,8329.50,8342.50,8258.59,2.66,2.001,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, pr cmt",,37.4,4320.00,1050.00
+Freeman-4,690,7,2,,8331.00,8344.00,8260.09,2.64,1.973,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,35.8,2710.00,935.00
+Freeman-4,690,8,2,,8334.50,8347.50,8263.59,2.64,2.162,,oil,obm,"Sst, gry, vf-f gr, wl srt, mica, sli shly, mud conc, pr cmt",,32.6,450.00,248.00
+Freeman-4,690,9,3,,8355.20,8367.90,8283.58,2.64,2.004,,oil,obm,"Sst, gry, vf gr, wl srt, shly, mud conc, pr cmt",,32.1,79.00,12.00
+Freeman-4,690,10,3,,8356.30,8369.00,8285.08,2.66,2.097,,oil,obm,"Sst, brn-gry, vf gr, wl srt, mica, shly, mud conc, pr cmt",,31.6,92.00,12.00
+Freeman-4,690,11,3,,8357.80,8370.50,8286.57,2.68,2.073,,oil,obm,"Sst, gry, vf gr, wl srt, shly, arg, mud conc, pr cmt",,28.8,24.00,3.40
+Freeman-4,690,12,3,,8358.80,8371.50,8287.57,2.64,2.080,,oil,obm,"Sst, gry, vf gr, wl srt, shly, arg, mud conc, pr cmt",,32.2,712.00,341.00
+Freeman-4,690,13,3,,8360.70,8373.40,8289.07,2.67,2.052,,oil,obm,"Sst, gry, vf gr, wl srt, shly, arg, mud conc, pr cmt",,28.0,39.00,9.00
+Freeman-4,690,14,3,,8366.40,8379.10,8295.07,2.63,2.006,,oil,obm,"Sst, gry, f gr, wl srt, mica, org carb, mud conc, pr cmt",,34.6,5020.00,2010.00
+Freeman-4,690,15,3,,8367.40,8380.10,8296.07,2.63,2.064,,oil,obm,"Sst, gry, f gr, wl srt, mica, org carb, pr cmt",,36.6,7160.00,2070.00
+Freeman-4,690,16,3,,8384.20,8396.90,8312.56,2.63,1.971,,oil,obm,"Sst, gry, f gr, wl srt, mica, thn Sh lam, org carb, pr cmt",,34.6,6210.00,1160.00
+Freeman-4,690,17,3,,8385.20,8397.90,8313.56,2.63,1.969,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mud conc, pr cmt",,35.0,9150.00,1750.00
+Freeman-4,690,18,4,,8406.30,8409.30,8325.05,2.64,1.983,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.7,4280.00,785.00
+Freeman-4,690,19,4,,8407.30,8410.30,8326.05,2.64,1.984,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.8,6220.00,1130.00
+Freeman-4,690,20,4,,8408.30,8411.30,8327.05,2.66,1.982,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,33.8,3290.00,674.00
+Freeman-4,690,21,4,,8409.30,8412.30,8328.05,2.65,1.972,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,33.0,4990.00,1410.00
+Freeman-4,690,22,4,,8410.20,8413.20,8329.05,2.64,1.964,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,33.9,5380.00,1420.00
+Freeman-4,690,23,4,,8411.20,8414.20,8330.05,2.63,1.964,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,35.3,3830.00,994.00
+Freeman-4,690,24,4,,8412.40,8415.40,8331.04,2.64,1.956,,oil,obm,"Sst, brn-gry, f-m gr, mod srt, mica, mass, pr cmt",,30.8,3970.00,1280.00
+Freeman-4,690,25,4,,8413.35,8416.35,8332.04,2.65,1.962,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mass, pr cmt",,35.2,3920.00,1250.00
+Freeman-4,690,26,4,,8414.40,8417.40,8333.04,2.63,1.966,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,36.3,3980.00,1270.00
+Freeman-4,690,27,4,,8415.70,8418.70,8334.54,2.66,1.958,,oil,obm,"Sst, brn-gry, f-crs gr, pbly, pr srt, mica, mass, pr cmt",,29.0,6070.00,1420.00
+Freeman-4,690,28,4,,8417.40,8420.40,8336.04,2.64,1.975,,oil,obm,"Sst, brn-gry, f-m gr, occ gr, pr srt, mica, mass, pr cmt",,32.2,5480.00,923.00
+Freeman-4,690,29,4,,8418.45,8421.45,8337.04,2.64,1.966,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.2,3330.00,1100.00
+Freeman-4,690,30,4,,8419.15,8422.15,8338.04,2.65,1.964,,oil,obm,"Sst, brn-gry, f-crs gr, pr srt, mica, mass, pr cmt",,30.4,4510.00,983.00
+Freeman-4,690,31,4,,8420.15,8423.15,8339.04,2.64,1.967,,oil,obm,"Sst, brn-gry, f-crs gr, pr srt, mica, mass, pr cmt",,30.6,2840.00,922.00
+Freeman-4,690,32,4,,8421.45,8424.45,8340.04,2.65,1.966,,oil,obm,"Sst, brn-gry, f-m gr, occ crs gr, pr srt, mica, mass, pr cmt",,30.0,1960.00,879.00
+Freeman-4,690,33,4,,8422.20,8425.20,8341.04,2.65,1.976,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,30.5,2500.00,868.00
+Freeman-4,690,34,4,,8423.20,8426.20,8342.04,2.64,1.970,,oil,obm,"Sst, brn-gry, f-m gr, occ crs gr, pr srt, mica, mass, pr cmt",,30.4,6510.00,1400.00
+Freeman-4,690,35,4,,8425.20,8428.20,8344.04,2.64,1.962,,oil,obm,"Sst, brn-gry, f-m gr, occ crs gr, pr srt, mica, mass, pr cmt",,30.3,4530.00,2050.00
+Freeman-4,690,36,4,,8426.20,8429.20,8345.03,2.65,1.972,,oil,obm,"Sst, brn-gry, f-m gr, mod srt, mica, mass, pr cmt",,31.2,4810.00,1300.00
+Freeman-4,690,37**,4,,8433.20,8436.20,8352.03,2.65,1.978,,oil,obm,"shly sst, dk gry, vf gr, occ crs gr, pr srt, mass, wl cmt",,16.8,0.43, 
+Freeman-4,690,38**,4,,8434.20,8437.20,8353.03,2.65,1.968,,oil,obm,"shly sst, dk gry, vf gr, occ crs gr, pr srt, mass, wl cmt",,16.7,0.58, 
+Freeman-4,690,39**,4,,8435.20,8438.20,8354.03,2.64,1.973,,oil,obm,"shly sst, dk gry, vf gr, occ crs gr, pr srt, mass, wl cmt",,16.9,0.61, 
+Freeman-4,690,40**,4,,8436.20,8439.20,8355.03,2.65,1.973,,oil,obm,"shly sst, dk gry, vf gr, occ crs gr, pr srt, mass, wl cmt",,17.3,0.58, 
+Freeman-4,690,41**,4,,8437.20,8440.20,8356.03,2.69,1.958,,oil,obm,"shly sst, dk gry, vf gr, occ crs gr, pr srt, mass, wl cmt",,18.2,3.50, 
+Freeman-4,690,42,4,,8438.20,8441.20,8357.03,,1.958,,oil,obm,SHALE - NO ANALYSIS,,,,
+Freeman-4,690,43,4,,8447.80,8450.80,8366.52,2.65,1.966,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, frac, pr cmt",,30.7,2400.00,580.00
+Freeman-4,690,44,4,,8448.40,8451.40,8367.02,2.65,1.967,,oil,obm,"Sst, gry, f gr, wl srt, mica, mass, pr cmt",,29.8,1580.00,624.00
+Freeman-4,690,45,4,,8449.20,8452.20,8368.02,2.65,1.980,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,29.9,1880.00,535.00
+Freeman-4,690,46,4,,8450.10,8453.10,8369.02,2.64,2.013,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,30.3,2050.00,455.00
+Freeman-4,690,47,4,,8451.40,8454.40,8370.02,2.64,2.007,,oil,obm,"Sst, gry, vf-f gr, wl srt, mica, mud conc, pr cmt",,27.3,129.00,34.00
+Freeman-4,690,48,4,,8452.70,8455.70,8371.52,2.65,1.981,,oil,obm,"Sst, gry, vf-f gr, wl srt, mica, mud conc, pr cmt",,26.3,945.00,227.00
+Freeman-4ST1,690,1,1,,8450.30,8466.30,8384.99,2.67,2.261,,oil,obm,"Sst, gry, f gr, wl srt, mud conc, pr cmt",,28.4,  730.,  173.
+Freeman-4ST1,690,2,1,,8451.20,8467.20,8385.99,2.67,2.275,,oil,obm,"Sst, gry, vf-f gr, wl srt, mica, mud conc, pr cmt",,29.6, 2180.,  654.
+Freeman-4ST1,690,3,1,,8452.40,8468.40,8386.99,2.66,2.306,,oil,obm,"Sst, gry, f gr, wl srt, mud conc, pr cmt",,30.2, 1690.,  337.
+Freeman-4ST1,690,4,1,,8453.90,8469.90,8388.49,2.66,2.344,,oil,obm,"Sst, gry, f gr, wl srt, sli shly, mud conc, pr cmt",,30.0, 2110.,  693.
+Freeman-4ST1,690,**5,1,,8456.20,8472.20,8390.99,2.63,2.338,,oil,obm,"shly sst, dk gry, vf gr, wl srt, arg, wl cmt",,15.3,      0.67, 
+Freeman-4ST1,690,**6,1,,8457.20,8473.20,8391.99,2.64,2.338,,oil,obm,"shly sst, dk gry, vf gr, wl srt, arg, wl cmt",,17.3,      0.34, 
+Freeman-4ST1,690,**7,1,,8458.20,8474.20,8392.98,2.64,2.257,,oil,obm,"shly sst, dk gry, vf gr, wl srt, arg, wl cmt",,16.9,      0.27, 
+Freeman-4ST1,690,8,1,,8459.30,8475.30,8393.98,2.64,2.172,,oil,obm,"Sst, brn-gry, f-m gr, mod srt, mica, mass, pr cmt",,30.7, 8440., 1150.
+Freeman-4ST1,690,9,1,,8461.20,8477.20,8395.98,2.65,2.254,,oil,obm,"Sst, brn-gry, f-m gr, mod srt, mica, mass, pr cmt",,29.9, 3930., 1100.
+Freeman-4ST1,690,10,1,,8473.60,8489.60,8408.46,2.66,2.194,,oil,obm,"Sst, dk gry, vf gr, wl srt, shly, mud conc, arg, mod cmt",,31.0,  182.,   48.
+Freeman-4ST1,690,11,1,,8474.20,8490.20,8408.96,2.66,2.16,,oil,obm,"Sst, dk gry, vf gr, wl srt, shly, mud conc, arg, mod cmt",,25.5,   50.,   26.
+Freeman-4ST1,690,12,1,,8475.20,8491.20,8409.96,2.66,2.122,,oil,obm,"Sst, dk gry, vf gr, wl srt, sli shly, mud conc, arg, mod cmt",,28.6,   30.,      9.0
+Freeman-4ST1,690,13,1,,8476.20,8492.20,8410.96,2.66,2.141,,oil,obm,"Sst, dk gry, vf gr, wl srt, sli shly, Sh lam, arg, mod cmt",,32.7,  283.,   71.
+Freeman-4ST1,690,14,1,,8478.70,8494.70,8413.46,2.66,2.035,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, fe stn, pr cmt",,32.2, 5460., 1620.
+Freeman-4ST1,690,15,1,,8480.70,8496.70,8415.45,2.66,2.088,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.4, 2540.,  726.
+Freeman-4ST1,690,16,1,,8481.70,8497.70,8416.45,2.64,2.103,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,36.3, 4950., 1340.
+Freeman-4ST1,690,17,1,,8482.70,8498.70,8417.45,2.65,2.109,,oil,obm,"Sst, gry, f gr, wl srt, mica, mass, pr cmt",,37.7, 5860.,  968.
+Freeman-4ST1,690,18,1,,8488.00,8504.00,8422.94,2.65,2.309,,oil,obm,"Sst, gry, f gr, wl srt, mica, mass, pr cmt",,31.9, 6650., 1580.
+Freeman-4ST1,690,19,1,,8489.00,8505.00,8423.94,2.65,2.202,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,36.6, 7620., 1250.
+Freeman-4ST1,690,20,1,,8490.00,8506.00,8424.94,2.65,2.109,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,20.2, 4990.,  847.
+Freeman-4ST1,690,21,1,,8490.60,8506.60,8425.44,2.65,2.117,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.7, 5660., 1330.
+Freeman-4ST1,690,22,1,,8491.00,8507.00,8425.94,2.66,2.141,,oil,obm,"Sst, brn-gry, f-crs gr, pr srt, mica, mass, pr cmt",,28.7, 4920.,  836.
+Freeman-4ST1,702,23,2,,8682.05,8694.05,8612.75,2.64,2.278,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,36.7, 9830., 2220.
+Freeman-4ST1,702,24,2,,8685.60,8697.60,8616.24,2.65,2.108,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, pr cmt",,33.9, 5820.,  610.
+Freeman-4ST1,702,25,2,,8686.20,8698.20,8616.74,2.64,2.063,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, pr cmt",,33.3, 4330., 2080.
+Freeman-4ST1,702,26,2,,8687.05,8699.05,8617.74,2.65,2.028,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, mod cmt",,33.6, 6070., 1750.
+Freeman-4ST1,702,27,2,,8689.30,8701.30,8619.74,2.65,2.042,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, pr cmt",,32.4, 4260.,  884.
+Freeman-4ST1,702,28,2,,8690.70,8702.70,8621.24,2.65,2.132,,oil,obm,"Sst, dk gry, vf-f gr, wl srt, mica, shly, org carb, pr cmt",,30.0,  500.,  240.
+Freeman-4ST1,702,29,2,,8691.40,8703.40,8621.74,2.66,2.099,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, pr cmt",,33.9, 6530.,  652.
+Freeman-4ST1,702,30,2,,8697.00,8709.00,8627.74,2.65,2.058,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.2, 5020., 1560.
+Freeman-4ST1,702,31,2,,8697.50,8709.50,8628.24,2.65,2.1,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.7, 4250., 2000.
+Freeman-4ST1,702,32,2,,8698.90,8710.90,8629.24,2.64,2.193,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,36.2,10290., 1680.
+Freeman-4ST1,702,33,2,,8700.50,8712.50,8631.24,2.65,1.99,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.7, 5630., 1260.
+Freeman-4ST1,702,34,2,,8701.40,8713.40,8631.74,2.56,1.984,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.3,  389.,  153.
+Freeman-4ST1,702,35,2,,8702.25,8714.25,8632.74,2.65,1.986,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,35.3, 9430., 1590.
+Freeman-4ST1,702,36,2,,8704.20,8716.20,8634.73,2.65,1.991,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.9, 8760., 1530.
+Freeman-4ST1,702,37,2,,8705.20,8717.20,8635.73,2.65,1.962,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,35.2, 9010., 1470.
+Freeman-4ST1,702,38,2,,8707.35,8719.35,8637.73,2.66,2.017,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,35.4,10000., 1480.
+Freeman-4ST1,702,39,2,,8708.20,8720.20,8638.73,2.65,1.986,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,35.6, 9940., 1360.
+Freeman-4ST1,702,40,2,,8709.35,8721.35,8639.73,2.65,1.933,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,36.3, 7240.,  900.
+Freeman-4ST1,702,41,2,,8710.30,8722.30,8640.73,2.66,1.919,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,33.2, 9100., 1630.
+Freeman-4ST1,702,42,2,,8711.30,8723.30,8641.73,2.66,1.994,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,33.5, 9990., 1940.
+Freeman-4ST1,702,43,2,,8712.25,8724.25,8642.73,2.65,2.028,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.0, 7800., 1420.
+Freeman-4ST1,702,44,2,,8713.25,8725.25,8643.73,2.66,2.033,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.3,10100., 1430.
+Freeman-4ST1,702,45,2,,8714.10,8726.10,8644.73,2.65,2.021,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.2, 9280., 1630.
+Freeman-4ST1,702,46,2,,8716.20,8728.20,8646.73,2.65,1.996,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,33.7, 8350., 1300.
+Freeman-4ST1,702,47,2,,8717.30,8729.30,8647.73,2.64,2.008,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.7, 7180., 3600.
+Freeman-4ST1,702,48,2,,8718.40,8730.40,8648.73,2.64,1.99,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.5, 8360., 1930.
+Freeman-4ST1,702,49,2,,8719.30,8731.30,8649.73,2.66,1.98,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,35.6,11480., 1870.
+Freeman-4ST1,702,50,2,,8720.20,8732.20,8650.73,2.66,2.006,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,35.3, 9230., 2120.
+Freeman-4ST1,702,51,2,,8721.20,8733.20,8651.73,2.65,2.026,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.8, 9070., 2600.
+Freeman-4ST1,702,52,2,,8722.20,8734.20,8652.73,2.64,2.046,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, mod cmt",,32.1, 8050., 2380.
+Freeman-4ST1,702,53,2,,8723.20,8735.20,8653.73,2.64,2.042,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, org carb lam, mod cmt",,32.6, 4840.,  734.
+Freeman-4ST1,702,54,2,,8725.20,8737.20,8655.73,2.67,2.016,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mud conc, pr cmt",,31.1, 6140., 2390.
+Freeman-4ST1,702,55,2,,8726.20,8738.20,8656.73,2.66,2.055,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,32.7, 7930., 2760.
+Freeman-4ST1,702,56,2,,8727.50,8739.50,8658.23,2.65,2.056,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,31.2, 8470.,  880.
+Freeman-4ST1,702,57,2,,8728.20,8740.20,8658.72,2.64,2.049,,oil,obm,"Sst, brn-gry, f-m gr, mod srt, mica, mass, pr cmt",,31.9, 8860., 1420.
+Freeman-4ST1,702,58,2,,8729.25,8741.25,8659.72,2.64,2.042,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.0, 9470., 2280.
+Freeman-4ST1,702,59,2,,8730.20,8742.20,8660.72,2.64,2.059,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,33.0, 8770., 1990.
+Freeman-4ST1,702,60,2,,8731.20,8743.20,8661.72,2.66,2.016,,oil,obm,"Sst, brn-gry, f gr, wl srt, mica, mass, pr cmt",,34.9,10740., 2820.
+Freeman-4ST1,702,61,2,,8732.90,8744.90,8663.22,2.65,2.031,,oil,obm,"Sst, brn-gry, vf-f gr, wl srt, mica, mass, pr cmt",,32.1, 9550., 1550.
+Freeman-4ST1,803,62,4,,10636.80,10655.80,10264.37,2.65,2.417,,oil,obm,"Sst, dk gry, vf gr, wl srt, shly, Sh lam, consol, wl cmt",,24.5,  411.,  328.
+Freeman-4ST1,803,63,4,,10642.20,10661.20,10268.43,2.65,2.396,,oil,obm,"Sst, dk gry, vf gr, wl srt, shly, Sh lam, consol, wl cmt",,28.9,  151.,  131.
+Freeman-4ST1,803,64,4,,10663.20,10682.20,10283.93,2.67,2.398,,oil,obm,"Sst, dk gry, vf gr, wl srt, shly, Sh lam, consol, wl cmt",,27.2,  129.,  106.
