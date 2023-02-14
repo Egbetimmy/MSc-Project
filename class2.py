@@ -44,6 +44,14 @@ class Petrophysics:
         self.df['SW'] = sw_archie
         return self.df
 
+    def sw_simandoux(phie, rt, rw, archieA, archieM, archieN, vshale, rshale):
+        A = (1 - vshale) * archieA * rw / (phie ** archieM)
+        B = A * vshale / (2 * rshale)
+        C = A / rt
+
+        sw = ((B ** 2 + C) ** 0.5 - B) ** (2 / archieN)
+        return sw
+
     def porosity_effective(self):
         porosity = self.df[self.df['PHI']]
         vclay = self.df[self.df['vshale']]
