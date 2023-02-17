@@ -42,7 +42,7 @@ class Petrophysics:
             sw_archie.append(sw)
         self.df['SW'] = sw_archie
         return self.df
-
+    """
     def sw_simandoux(phie, rt, rw, archieA, archieM, archieN, vshale, rshale):
         A = (1 - vshale) * archieA * rw / (phie ** archieM)
         B = A * vshale / (2 * rshale)
@@ -50,7 +50,7 @@ class Petrophysics:
 
         sw = ((B ** 2 + C) ** 0.5 - B) ** (2 / archieN)
         return sw
-
+    """
     def porosity_effective(self):
         porosity = self.df[self.df['PHI']]
         vclay = self.df[self.df['vshale']]
@@ -70,13 +70,23 @@ class Petrophysics:
         self.df['velocity'] = velocity
         return self.df
 
+    def synthetic_seimic(self, x):
+        velocity = self.df['velocity']
+        density = self.df[self.df.columns[x]]
+        synthetic = []
+        for vel, den in zip(velocity, density):
+            syn = vel * den
+            synthetic.append(syn)
+        self.df['synthetic_seimic'] = synthetic
+        return self.df
+
     def formation_factor(self, arch_a, arch_m):
         porosity = self.df[self.df['PHI']]
-        formaton_factor = []
+        formation_factor = []
         for por in porosity:
             form = arch_a / (por ** arch_m)
-            formaton_factor.append(form)
-        self.df['formation_factor'] = formaton_factor
+            formation_factor.append(form)
+        self.df['formation_factor'] = formation_factor
         return self.df
 
     def ro(self, x):
