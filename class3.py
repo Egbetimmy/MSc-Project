@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 
 # %matplotlib inline
-# TODO: add a proper documetation
+# TODO: add a proper documentation
 # TODO: review the code to optimize it
 
 class Anisotropy:
@@ -28,14 +28,14 @@ class Anisotropy:
             anisotropy_correction = ((1 - delta) * seismic)
 
             correction.append(anisotropy_correction)
-        self.df['Anistropy_correction'] = correction
+        self.df['Anisotropy_correction'] = correction
         return self.df
 
     def plot_data(self, n_spaces=50):
         data_frame = self.df
 
         fig, axes = plt.subplots(figsize=(10, 10))
-        curve_names = ['Thomsen_delta', 'Anistropy_correction', "Vint_cks(m/s)", "Vint_seismic(m/s)"]
+        curve_names = ['Thomsen_delta', 'Anisotropy_correction', "Vint_cks(m/s)", "Vint_seismic(m/s)"]
 
         # TODO: try to make it just two plots. Try it out and see how it works.
 
@@ -47,7 +47,7 @@ class Anisotropy:
         ax1.plot('Thomsen_delta', 'Depth', data=data_frame, color="green", lw=0.5)
         ax1.set_xlim(data_frame.Thomsen_delta.min(), data_frame.Thomsen_delta.max())
 
-        ax2.plot('Anistropy_correction', 'Depth', data=data_frame, color="red", lw=0.5)
+        ax2.plot('Anisotropy_correction', 'Depth', data=data_frame, color="red", lw=0.5)
         ax2.set_xlim(data_frame.Anistropy_correction.min(), data_frame.Anistropy_correction.max())
 
         ax3.plot('Vint_cks(m/s)', 'Depth', data=data_frame, color="blue", lw=0.5)
