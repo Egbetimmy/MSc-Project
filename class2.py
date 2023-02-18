@@ -1,6 +1,21 @@
 import matplotlib.pyplot as plt
 
 
+def facies_classification(df):
+    facies = []
+    for value in df:
+        if value < 66:
+            facies.append('sand')
+        elif 66 <= value < 86:
+            facies.append('shaly sand')
+        elif 86 <= value < 219:
+            facies.append('shale')
+        else:
+            facies.append('none')
+
+    return facies
+
+
 # %matplotlib inline
 class Petrophysics:
     """
@@ -42,6 +57,7 @@ class Petrophysics:
             sw_archie.append(sw)
         self.df['SW'] = sw_archie
         return self.df
+
     """
     def sw_simandoux(phie, rt, rw, archieA, archieM, archieN, vshale, rshale):
         A = (1 - vshale) * archieA * rw / (phie ** archieM)
@@ -51,6 +67,7 @@ class Petrophysics:
         sw = ((B ** 2 + C) ** 0.5 - B) ** (2 / archieN)
         return sw
     """
+
     def porosity_effective(self):
         porosity = self.df[self.df['PHI']]
         vclay = self.df[self.df['vshale']]

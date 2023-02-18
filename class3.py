@@ -48,7 +48,7 @@ class Anisotropy:
         ax1.set_xlim(data_frame.Thomsen_delta.min(), data_frame.Thomsen_delta.max())
 
         ax2.plot('Anisotropy_correction', 'Depth', data=data_frame, color="red", lw=0.5)
-        ax2.set_xlim(data_frame.Anistropy_correction.min(), data_frame.Anistropy_correction.max())
+        ax2.set_xlim(data_frame.Anisotropy_correction.min(), data_frame.Anisotropy_correction.max())
 
         ax3.plot('Vint_cks(m/s)', 'Depth', data=data_frame, color="blue", lw=0.5)
         ax3.set_xlim(data_frame['Vint_cks(m/s)'].min(), data_frame['Vint_cks(m/s)'].max())
