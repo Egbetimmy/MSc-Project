@@ -112,20 +112,23 @@ def displayplot():
 
 
 # TODO
+@interact
 def interactive_plot():
-    @interact
-    def scatter_plot(x=list(df.select_dtypes('number').columns),
-                     y=list(df.select_dtypes('number').columns)[1:]):
-        if x == y:
-            print(f"Please select seperate variables for X and Y")
-        else:
-            plot = df.iplot(kind='scatter', x=x, y=y, mode='markers',
-                            xTitle=x.title(), yTitle=y.title(), title=f'{y.title()} vs {x.title()}')
-            # if you are using Google Colab, comment out the above line of code and uncomment the lines below
-            # fig = px.scatter(df, x=x, y=y, title=f'{y.title()} vs {x.title()}')
-            # fig.show(renderer="colab")
-
+    x = list(df.select_dtypes('number').columns),
+    y = list(df.select_dtypes('number').columns)[1:]
+    """
+    if x == y:
+        print(f"Please select separate variables for X and Y")
+    else:
+        plot = df.iplot(kind='scatter', x=x, y=y, mode='markers',
+                        xTitle=x.title(), yTitle=y.title(), title=f'{y.title()} vs {x.title()}')
+        # if you are using Google Colab, comment out the above line of code and uncomment the lines below
+        # fig = px.scatter(df, x=x, y=y, title=f'{y.title()} vs {x.title()}')
+        # fig.show(renderer="colab")
         st.plotly_chart(plot, use_container_width=True)
+        """
+
+    st.write(print(f"Correlation: {df[x].corr(df[y])}"))
 
 
 # Add a title and intro text
