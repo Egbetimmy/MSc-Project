@@ -8,12 +8,21 @@ def facies_classification(df):
             facies.append('sand')
         elif 66 <= value < 86:
             facies.append('shaly sand')
-        elif 86 <= value < 219:
+        elif 86 <= value < 220:
             facies.append('shale')
         else:
             facies.append('none')
 
     return facies
+
+
+def vs_from_vp(df):
+    vs = []
+    for vp in df:
+        # Calculate S-wave velocity using Gardner equation (m/s)
+        vs.append(vp / (2 ** 0.5))
+
+    return vs
 
 
 # %matplotlib inline
