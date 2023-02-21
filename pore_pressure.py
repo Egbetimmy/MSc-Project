@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def eaton_method(Vp, Vs, rho, phi):
+def eaton_method(Vp, Vs, phi):
 
     # Define constants
     rho_w = 1000  # density of water, kg/m^3
@@ -14,7 +14,7 @@ def eaton_method(Vp, Vs, rho, phi):
     return pp
 
 
-def Bowers_method(Vp, Vs, rho, phi):
+def Bowers_method(Vp, Vs, phi):
 
     # Define constants
     rho_b = 2.65  # bulk density of the formation, g/cm^3
@@ -29,12 +29,11 @@ def Bowers_method(Vp, Vs, rho, phi):
     return pp
 
 
-def Matthews_Kelly_method(rho):
+def Matthews_Kelly_method(depth, rho):
 
     # Define constants
     rho_w = 1000  # density of water, kg/m^3
     g = 9.81  # acceleration due to gravity, m/s^2
-    depth = np.array([500, 1000, 1500, 2000])  # depth, m
 
     # Calculate formation density
     rho_f = rho - rho_w
