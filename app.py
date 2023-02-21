@@ -1,44 +1,6 @@
-# Standard Data Science helpers
-import numpy as np
-import pandas as pd
-import scipy
-
-# Instansiate the Plotly charting library.
-import chart_studio.plotly as py
-import plotly.graph_objs as go
-import plotly.express as px
-# We use plotly.offline as this allows us to create interactive
-# visualisations without the use of an internet connection,
-# making our notebook more distributable to others.
-from plotly.offline import iplot, init_notebook_mode
-from ipywidgets import interact, interact_manual, widgets
-
-init_notebook_mode(connected=True)
-
-# The Cufflinks library allows us to directly bind
-# Pandas dataframes to Plotly charts.
-import cufflinks as cf
-
-# Once again we use the Cufflinks library in offline mode.
-cf.go_offline(connected=True)
-cf.set_config_file(colorscale='plotly', world_readable=True)
-
-# Extra options. We use these to make our interactive
-# visualisations more aesthetically appealing.
-from IPython.core.display import HTML
-
-pd.options.display.max_rows = 30
-pd.options.display.max_columns = 25
-
-# Show all code cells outputs
-from IPython.core.interactiveshell import InteractiveShell
-
-InteractiveShell.ast_node_interactivity = 'all'
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
-import plotly.express as px
-from class3 import Anisotropy
 
 st.set_page_config(layout="wide")
 
@@ -111,26 +73,6 @@ def displayplot():
     st.pyplot(fig)
 
 
-# TODO
-@interact
-def interactive_plot():
-    x = list(df.select_dtypes('number').columns),
-    y = list(df.select_dtypes('number').columns)[1:]
-    """
-    if x == y:
-        print(f"Please select separate variables for X and Y")
-    else:
-        plot = df.iplot(kind='scatter', x=x, y=y, mode='markers',
-                        xTitle=x.title(), yTitle=y.title(), title=f'{y.title()} vs {x.title()}')
-        # if you are using Google Colab, comment out the above line of code and uncomment the lines below
-        # fig = px.scatter(df, x=x, y=y, title=f'{y.title()} vs {x.title()}')
-        # fig.show(renderer="colab")
-        st.plotly_chart(plot, use_container_width=True)
-        """
-
-    st.write(print(f"Correlation: {df[x].corr(df[y])}"))
-
-
 # Add a title and intro text
 st.title('Anisotropy Data Visualization')
 st.text('This is a web app to allow Visualization of Anisotropy Data')
@@ -141,7 +83,7 @@ upload_file = st.sidebar.file_uploader('Upload a file containing Anisotropy data
 # Sidebar navigation
 st.sidebar.title('Navigation')
 options = st.sidebar.radio('Select what you want to display:',
-                           ['Home', 'Data Summary', 'Data Header', 'Data Plot', 'Interactive Plots'])
+                           ['Home', 'Data Summary', 'Data Header', 'Data Plot'])
 
 # Check if file has been uploaded
 if upload_file is not None:
@@ -156,5 +98,3 @@ elif options == 'Data Header':
     data_header()
 elif options == 'Data Plot':
     displayplot()
-elif options == 'Interactive Plots':
-    interactive_plot()
