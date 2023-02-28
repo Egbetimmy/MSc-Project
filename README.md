@@ -10,3 +10,5 @@ Permeability prediction
     feature engineering
     ML model
 Anisotropy automation
+    calculations
+    plots
