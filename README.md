@@ -8,6 +8,7 @@ Permeability prediction
     data colllection
     data cleaning
     feature engineering
+        dealing with outliers
     ML model
 Anisotropy automation
     calculations
