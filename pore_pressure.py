@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def eaton_method(Vp, Vs, phi):
 
     # Define constants
