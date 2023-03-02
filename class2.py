@@ -1,28 +1,104 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 
-def facies_classification(df):
+def rearrange_columns(df, col_order):
+    """
+    Rearrange columns in a pandas dataframe based on a given list of column names.
+
+    Parameters
+    -----------
+    df : pandas.DataFrame
+        Input dataframe
+    col_order : list
+        List of column names in the order they should be arranged
+
+    Returns
+    --------
+    df : pandas.DataFrame
+        Dataframe with rearranged columns
+    """
+    # Get a list of all columns in the dataframe
+    cols = df.columns.tolist()
+
+    # Make sure all the columns in col_order are present in the dataframe
+    for col in col_order:
+        if col not in cols:
+            raise ValueError(f"{col} not found in dataframe columns")
+
+    # Rearrange the columns based on col_order
+    df = df.reindex(columns=col_order)
+
+    return df
+
+
+def rename_columns(df, old_names, new_names):
+    """
+    Rename columns in a dataframe.
+
+    Parameters
+    ----------
+    df (pd.DataFrame):
+        the input dataframe
+    old_names (list):
+        a list of the current column names
+    new_names (list):
+        a list of the new column names, in the same order as old_names
+
+    Returns
+    ----------
+    pd.DataFrame:
+        the renamed dataframe
+    """
+    renamed_df = df.rename(columns=dict(zip(old_names, new_names)))
+    return renamed_df
+
+
+def facies_classification(column):
+    """
+        Classify lithofacies based on gamma ray values.
+
+        Parameters
+        ----------
+        df (pd.DataFrame):
+            Dataframe containing gamma ray values.
+
+        Returns
+        ----------
+        pd.DataFrame:
+            Dataframe with facies classification.
+        """
+
     facies = []
-    for value in df:
-        if value < 66:
+    for value in column:
+        if np.isnan(value):
+            facies.append('None')
+        elif value < 66:
             facies.append('sand')
         elif 66 <= value < 86:
             facies.append('shaly sand')
-        elif 86 <= value < 220:
-            facies.append('shale')
         else:
-            facies.append('none')
+            facies.append('shale')
 
     return facies
 
 
 def vs_from_vp(df):
-    vs = []
-    for vp in df:
-        # Calculate S-wave velocity using Gardner equation (m/s)
-        vs.append(vp / (2 ** 0.5))
+    """
+    Calculates S-wave velocity (m/s) from compressional wave velocity using Gardner equation.
 
-    return vs
+    Parameters
+    ----------
+    df:
+        pandas DataFrame containing compressional wave velocity (m/s) in column 'vp'
+
+    Returns
+    ----------
+    list of S-wave velocities (m/s)
+    """
+    vp = df['vp']
+    vs = vp / (2 ** 0.5)
+    return vs.tolist()
 
 
 # %matplotlib inline
@@ -35,112 +111,330 @@ class Petrophysics:
         self.df = df
 
     def shale_volume(self, x):
-        gamma_ray = self.df[self.df.columns[x]]
+        """
+        Calculates shale volume from gamma ray data.
+
+        Parameters
+        ----------
+        x : int
+            Column index of the gamma ray data in the dataframe.
+
+        Returns
+        -------
+        pandas.DataFrame
+            A dataframe containing the calculated shale volume data.
+        """
+
+        # Extract gamma ray data from dataframe
+        gamma_ray = self.df.iloc[:, x]
+
+        # Calculate gamma ray percentiles
         gamma_ray_max = gamma_ray.quantile(q=0.99)
         gamma_ray_min = gamma_ray.quantile(q=0.01)
-        vshale = []
-        for gamma in gamma_ray:
-            vsh = round(
-                (gamma - gamma_ray_min) / (gamma_ray_max - gamma_ray_min), 4)
-            vshale.append(vsh)
+
+        # Calculate shale volume data
+        vshale = (gamma_ray - gamma_ray_min) / (gamma_ray_max - gamma_ray_min)
+
+        # Round shale volume data to four decimal places
+        vshale = vshale.round(4)
+
+        # Create a new column in the dataframe for the shale volume data
         self.df['vshale'] = vshale
+
         return self.df
 
     def density_porosity(self, x, matrix_density, fluid_density):
-        density = self.df[self.df.columns[x]]
-        porosity = []
-        for den in density:
-            por = round((matrix_density - den) / (matrix_density - fluid_density), 4)
-            porosity.append(por)
+        """
+        Calculates density porosity from density data.
+
+        Parameters
+        ----------
+        x : int
+            Column index of the density data in the dataframe.
+        matrix_density : float
+            Matrix density (g/cc).
+        fluid_density : float
+            Fluid density (g/cc).
+
+        Returns
+        -------
+        pandas.DataFrame
+            A dataframe containing the calculated density porosity data.
+        """
+
+        # Extract density data from dataframe
+        density = self.df.iloc[:, x]
+
+        # Calculate density porosity data
+        porosity = (matrix_density - density) / (matrix_density - fluid_density)
+
+        # Round density porosity data to four decimal places
+        porosity = porosity.round(4)
+
+        # Create a new column in the dataframe for the density porosity data
         self.df['PHI'] = porosity
+
         return self.df
 
     def sw_archie(self, x, y, archieA, archieM, archieN):
-        porosity = self.df[self.df['PHI']]
-        rw = self.df[self.df.columns[x]]
-        rt = self.df[self.df.columns[y]]
-        sw_archie = []
-        for a, b, c in zip(porosity, rw, rt):
-            sw = ((archieA /
-                   (a ** archieM)) * (b / c)) ** (1 / archieN)
-            sw_archie.append(sw)
+        """
+        Calculates water saturation using the Archie equation.
+
+        Parameters
+        ----------
+        x : int
+            Column index of the resistivity of the formation water (Rw) data in the dataframe.
+        y : int
+            Column index of the true resistivity (Rt) data in the dataframe.
+        archieA : float
+            Archie constant A.
+        archieM : float
+            Archie exponent m.
+        archieN : float
+            Archie exponent n.
+
+        Returns
+        -------
+        pandas.DataFrame
+            A dataframe containing the calculated water saturation data.
+        """
+
+        # Extract necessary data from dataframe
+        porosity = self.df['PHI']
+        rw = self.df.iloc[:, x]
+        rt = self.df.iloc[:, y]
+
+        # Calculate water saturation using the Archie equation
+        sw_archie = (archieA / (porosity ** archieM)) * (rw / rt) ** archieN
+
+        # Create a new column in the dataframe for the water saturation data
         self.df['SW'] = sw_archie
+
         return self.df
 
-    """
-    def sw_simandoux(phie, rt, rw, archieA, archieM, archieN, vshale, rshale):
-        A = (1 - vshale) * archieA * rw / (phie ** archieM)
-        B = A * vshale / (2 * rshale)
+    def sw_simandoux(self, rw_col, rt_col, archieA, archieM, archieN, rshale_col):
+        """
+        Calculates water saturation using the Simandoux equation.
+
+        Parameters
+        ----------
+        rw_col (int):
+            Index of the column containing the formation water resistivity values.
+        rt_col (int):
+            Index of the column containing the true resistivity values.
+        archieA (float):
+            Archie's A constant.
+        archieM (float):
+            Archie's M constant.
+        archieN (float):
+            Archie's N constant.
+        rshale_col (float):
+            Average resistivity in shale.
+
+        Returns
+        ----------
+        sw_simandoux (list):
+            List of water saturation values calculated using the Simandoux equation.
+        """
+        # Get required columns from DataFrame
+        phie_col = self.df['effective porosity']
+        rw = self.df.iloc[:, rw_col]
+        rt = self.df.iloc[:, rt_col]
+        vclay_col = self.df.iloc[:, rshale_col]
+
+        # Calculate Simandoux equation components
+        A = (1 - vclay_col) * archieA * rw / (phie_col ** archieM)
+        B = A * vclay_col / (2 * rshale_col)
         C = A / rt
 
-        sw = ((B ** 2 + C) ** 0.5 - B) ** (2 / archieN)
-        return sw
-    """
+        # Calculate water saturation using Simandoux equation
+        sw_simandoux = ((B ** 2 + C) ** 0.5 - B) ** (2 / archieN)
 
-    def porosity_effective(self):
-        porosity = self.df[self.df['PHI']]
-        vclay = self.df[self.df['vshale']]
-        effective_porosity = []
-        for por, shale_volume in zip(porosity, vclay):
-            eff_por = porosity - self.shale_volume() * shale_volume
-            effective_porosity.append(eff_por)
+        return sw_simandoux
+
+    def porosity_effective(self, phitclay):
+        """
+        Converts total porosity to effective porosity
+
+        Parameters
+        ----------
+        phitclay : float
+            Clay porosity - taken from a shale interval (decimal)
+
+        Returns
+        -------
+        pandas.DataFrame
+            A dataframe containing the effective porosity (decimal)
+        """
+
+        # Extract input columns from dataframe
+        phit = self.df['PHI']
+        vclay = self.df['vshale']
+
+        # Calculate effective porosity
+        effective_porosity = phit - vclay * phitclay
+
+        # Create a new column in the dataframe for the effective porosity
         self.df['effective porosity'] = effective_porosity
+
         return self.df
 
     def slowness_to_velocity(self, x):
-        sonic = self.df[self.df.columns[x]]
-        velocity = []
-        for vel in sonic:
-            son = 1000000 / vel
-            velocity.append(son)
+        """
+        Converts slowness to velocity.
+
+        Parameters
+        ----------
+        x : int
+            Column index of the slowness data in the dataframe.
+
+        Returns
+        -------
+        pandas.DataFrame
+            A dataframe containing the converted velocity data.
+        """
+
+        # Extract slowness data from dataframe
+        slowness = self.df.iloc[:, x]
+
+        # Calculate velocity data
+        velocity = 1000000 / slowness
+
+        # Create a new column in the dataframe for the velocity data
         self.df['velocity'] = velocity
+
         return self.df
 
-    def synthetic_seimic(self, x):
+    def synthetic_seismic(self, x):
+        """
+        Calculates synthetic seismic data.
+
+        Parameters
+        ----------
+        x : int
+            Column index of the density data in the dataframe.
+
+        Returns
+        -------
+        pandas.DataFrame
+            A dataframe containing the calculated synthetic seismic data.
+        """
+
+        # Extract velocity and density data from dataframe
         velocity = self.df['velocity']
-        density = self.df[self.df.columns[x]]
-        synthetic = []
-        for vel, den in zip(velocity, density):
-            syn = vel * den
-            synthetic.append(syn)
-        self.df['synthetic_seimic'] = synthetic
+        density = self.df.iloc[:, x]
+
+        # Calculate synthetic seismic data
+        synthetic = velocity * density
+
+        # Create a new column in the dataframe for the synthetic seismic data
+        self.df['synthetic_seismic'] = synthetic
+
         return self.df
 
     def formation_factor(self, arch_a, arch_m):
-        porosity = self.df[self.df['PHI']]
-        formation_factor = []
-        for por in porosity:
-            form = arch_a / (por ** arch_m)
-            formation_factor.append(form)
+        """
+        Calculates formation factor using Archie's equation
+        Parameters
+        ----------
+        arch_a : float
+            Archie's constant 'a' (decimal)
+        arch_m : float
+            Archie's constant 'm' (decimal)
+        Returns
+        -------
+        DataFrame
+            Returns a dataframe containing the formation factor (decimal)
+        """
+
+        # Extract input columns from dataframe
+        porosity = self.df['PHI']
+
+        # Calculate synthetic formation factor
+        formation_factor = arch_a / porosity ** arch_m
+
+        # Create a new column in the dataframe for the formation factor data
         self.df['formation_factor'] = formation_factor
         return self.df
 
-    def ro(self, x):
-        rw = self.df[self.df.columns[x]]
-        formation_factor = self.df[self.df['formation_factor']]
-        ro = []
-        for res, form in zip(rw, formation_factor):
-            rr = form * res
-            ro.append(rr)
+    def ro(self, rw_col_idx, formation_factor_col_idx):
+        """
+        Calculate formation resistivity factor.
+
+        Parameters
+        ----------
+        formation_factor_col_idx : int
+                Column index of the formation factor of the formation (Rw) data in the dataframe.
+        rw_col_idx : int
+                Column index of the true resistivity (Rw) data in the dataframe.
+        df (pd.DataFrame):
+                Dataframe containing resistivity and formation factor values.
+
+        Returns
+        ----------
+        pd.DataFrame:
+            Dataframe with formation resistivity values.
+            """
+
+        # Extract input columns from dataframe
+        archie_rw = self.df.iloc[:, rw_col_idx]
+        formation_factor = self.df.iloc[:, formation_factor_col_idx]
+
+        # Calculate formation resistivity
+        ro = archie_rw * formation_factor
+
+        # Create a new column in the dataframe for the formation resistivity data
         self.df['ro'] = ro
         return self.df
 
     def swirr(self):
+        """
+        Calculate irreducible water saturation.
+
+        Parameters
+        ----------
+        df (pd.DataFrame):
+            Dataframe containing formation factor values.
+
+        Returns
+        ----------
+        pd.DataFrame:
+            Dataframe with irreducible water saturation values.
+        """
+
+        # Extract input columns from dataframe
         formation_factor = self.df[self.df['formation_factor']]
-        swirr = []
-        for form in formation_factor:
-            swr = (form / 2000) ** (1 / 2)
-            swirr.append(swr)
+
+        # Calculate irreducible water saturation
+        swirr = (formation_factor / 2000) ** (1 / 2)
+
+        # Create a new column in the dataframe for the irreducible water saturation data
         self.df['swirr'] = swirr
         return self.df
 
     def permeability(self):
-        porosity = self.df[self.df['PHI']]
-        swirr = self.df[self.df['swirr']]
-        permeability = []
-        for por, swr in zip(porosity, swirr):
-            perm = 307 + (26552 * (por ** 2)) - (3450 * (por * swr) ** 2)
-            permeability.append(perm)
+        """
+        Calculate permeability using porosity and irreducible water saturation.
+
+        Parameters
+        ----------
+        df (pd.DataFrame):
+            Dataframe containing porosity and irreducible water saturation values.
+
+        Returns
+        ----------
+        pd.DataFrame:
+            Dataframe with permeability values.
+        """
+
+        # Extract input columns from dataframe
+        porosity = self.df['PHI'].values
+        swirr = self.df['swirr'].values
+
+        # Calculate permeability
+        permeability = 307 + (26552 * (porosity ** 2)) - (3450 * (porosity * swirr) ** 2)
+
+        # Create a new column in the dataframe for the permeability data
         self.df['permeability'] = permeability
         return self.df
 
@@ -265,8 +559,3 @@ class Petrophysics:
             ax.spines["top"].set_position(("axes", 1.02))
 
         return plt.tight_layout()
-
-
-def rename(df):
-    mapping = {df.columns[0]: 'new0', df.columns[1]: 'new1'}
-    su = df.rename(columns=mapping)
