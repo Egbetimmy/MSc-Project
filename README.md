@@ -1,12 +1,12 @@
 # MSc-Project
 Pore pressure prediction
-    data colllection
+    data collection
     data cleaning
     feature engineering
         dealing with outliers
     ML model
 Permeability prediction
-    data colllection
+    data collection
     data cleaning
     feature engineering
         dealing with outliers
