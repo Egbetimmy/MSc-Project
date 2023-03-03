@@ -1,4 +1,4 @@
-class Well_metrics:
+class WellMetrics:
     """
     Conversion functions
     """
@@ -136,6 +136,8 @@ class Well_metrics:
         ----------
         self.df : float
             Input temperature value
+        x: int
+            Index of the column in the dataframe containing the temperature.
         inputunits : string
             Input temperature units:
                 c = celsius
