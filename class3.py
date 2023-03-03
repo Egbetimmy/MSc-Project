@@ -10,28 +10,53 @@ class Anisotropy:
         self.df = df
 
     def thomsen_delta(self, x, y):
-        seismic_data = self.df[self.df.columns[x]]
-        well_data = self.df[self.df.columns[y]]
-        thomsen_delta = []
-        for well, seismic in zip(well_data, seismic_data):
-            thomsen_anisotropy = ((well / seismic) - 1)
+        """
+        Calculates Thomsen delta, which is a measure of the anisotropy in seismic wave propagation in subsurface
+        formations.
 
-            thomsen_delta.append(thomsen_anisotropy)
+        Parameters:
+        x (int): Index of column containing seismic data in the dataframe.
+        y (int): Index of column containing well data in the dataframe.
+
+        Returns:
+        pandas.DataFrame: Dataframe with a new column named 'Thomsen_delta' containing Thomsen delta values.
+        """
+
+        # Get values from Dataframe
+        seismic_data = self.df.iloc[:, x]
+        well_data = self.df.iloc[:, y]
+
+        # Calculate the Thomsen delta values in each cell
+        thomsen_delta = ((well_data / seismic_data) - 1)
+
+        # Add the calculated Thomsen delta values to the dataframe and return
         self.df['Thomsen_delta'] = thomsen_delta
         return self.df
 
-    def correction(self, x):
-        seismic_data = self.df[self.df.columns[x]]
-        thomsen_delta = self.df['Thomsen_delta']
-        correction = []
-        for delta, seismic in zip(thomsen_delta, seismic_data):
-            anisotropy_correction = ((1 - delta) * seismic)
+    def anisotropy_correction(self, x):
+        """
+        Calculates the anisotropy correction factor based on the Thomsen delta value and the seismic data.
 
-            correction.append(anisotropy_correction)
-        self.df['Anisotropy_correction'] = correction
+        Args:
+            x (int): Index of the seismic data column in the DataFrame.
+
+        Returns:
+            pandas.DataFrame: DataFrame with an additional column 'Anisotropy_correction' containing the
+            anisotropy correction factor for each well.
+        """
+
+        # Get values from Dataframe
+        seismic_data = self.df.iloc[:, x]
+        thomsen_delta = self.df['Thomsen_delta']
+
+        # Calculate the anisotropy correction values in each cell
+        anisotropy_correction = (1 - thomsen_delta) * seismic_data
+
+        # Add the calculated anisotropy correction values to the dataframe and return
+        self.df['Anisotropy_correction'] = anisotropy_correction
         return self.df
 
-    def plot_data(self, n_spaces=50):
+    def plot_data(self):
         data_frame = self.df
 
         fig, axes = plt.subplots(figsize=(10, 10))
