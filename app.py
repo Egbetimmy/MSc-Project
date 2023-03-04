@@ -83,7 +83,7 @@ upload_file = st.sidebar.file_uploader('Upload a file containing Anisotropy data
 # Sidebar navigation
 st.sidebar.title('Navigation')
 options = st.sidebar.radio('Select what you want to display:',
-                           ['Home', 'Data Summary', 'Data Header', 'Data Plot'])
+                           ['Home', 'Data Summary', 'Data Header', 'Data Visualization'])
 
 # Check if file has been uploaded
 if upload_file is not None:
@@ -96,5 +96,5 @@ elif options == 'Data Summary':
     data_summary()
 elif options == 'Data Header':
     data_header()
-elif options == 'Data Plot':
+elif options == 'Data Visualization':
     displayplot()
