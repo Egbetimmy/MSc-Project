@@ -65,4 +65,7 @@ def refactored_function(self, arg1_name, arg2_name, arg3_name):
     # refactored code here
     return result
 
-
+## Deployment if possible
+    firebase
+    github
+    netlify
