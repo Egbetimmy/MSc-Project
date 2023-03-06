@@ -1,6 +1,13 @@
 import math
 
 
+def true_vertical_depth(df, x, y):
+    measured_depth = df[df.columns[x]]
+    angle_of_inclination = df[df.columns[y]]
+    tvd = measured_depth * math.cos(math.radians(angle_of_inclination))
+    return tvd
+
+
 class WellMetrics:
     """
     Conversion functions
@@ -8,12 +15,6 @@ class WellMetrics:
 
     def __int__(self, df):
         self.df = df
-
-    def true_vertical_depth(self, x, y):
-        measured_depth = self.df[self.df.columns[x]]
-        angle_of_inclination = self.df[self.df.columns[y]]
-        tvd = measured_depth * math.cos(math.radians(angle_of_inclination))
-        return tvd
 
     # Depth and length conversions
     def ft_to_m(self, x):
