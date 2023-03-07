@@ -97,7 +97,7 @@ def vs_from_vp(df):
     list of S-wave velocities (m/s)
     """
     vp = df['vp']
-    vs = vp / (2 ** 0.5)
+    vs = round(vp / (2 ** 0.5), 4)
     return vs.tolist()
 
 
