@@ -1,10 +1,8 @@
 import math
 
 
-def true_vertical_depth(df, x, y):
-    measured_depth = df[df.columns[x]]
-    angle_of_inclination = df[df.columns[y]]
-    tvd = measured_depth * math.cos(math.radians(angle_of_inclination))
+def true_vertical_depth(measured_depth, angle_of_inclination):
+    tvd = round(measured_depth * math.cos(math.radians(angle_of_inclination)), 2)
     return tvd
 
 
