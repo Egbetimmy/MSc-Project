@@ -1,5 +1,115 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.colors as colors
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+import matplotlib.ticker as ticker
+
+
+def make_facies_log_plot(logs, facies_colors, Formation_name, top):
+    logs = logs.sort_values(by='DEPT')
+    cmap_facies = colors.ListedColormap(
+        facies_colors[0:len(facies_colors)], 'indexed')
+
+    ztop = logs.DEPT.min();
+    zbot = logs.DEPT.max()
+
+    cluster = np.repeat(np.expand_dims(logs['Facies_pred'].values, 1), 100, 1)
+
+    f, ax = plt.subplots(nrows=1, ncols=7, figsize=(19, 16))
+    ax[0].plot(logs.GR, logs.DEPT, '-g', linewidth=2)
+    ax[1].plot(logs.NPLS, logs.DEPT, '-', linewidth=2)
+    ax[2].plot(logs.RHOB, logs.DEPT, '-', color='0.5', linewidth=2)
+    ax[3].plot(logs.DT, logs.DEPT, '-', color='r', linewidth=2)
+    ax[4].plot(logs.PE, logs.DEPT, '-', color='black', linewidth=2)
+    ax[5].plot(logs.Log_ILD, logs.DEPT, '-', color='purple', linewidth=2)
+    im = ax[6].imshow(cluster, interpolation='none', aspect='auto',
+                      cmap=cmap_facies, vmin=1, vmax=8)
+    #     im=ax[6].imshow(cluster, interpolation='none', aspect='auto',
+    #                     cmap=cmap_facies,vmin=1,vmax=6)
+
+    divider = make_axes_locatable(ax[6])
+    cax = divider.append_axes("right", size="20%", pad=0.05)
+    cbar = plt.colorbar(im, cax=cax)
+    cbar.set_label((30 * ' ').join(['1', '2',
+                                    '3', '4 ', ' 5 ', ' 6  ',
+                                    ' 7 ', '8']))
+    #     cbar.set_label((35*' ').join(['1', '2',
+    #                                  '3', '4 ', ' 5 ', ' 6  ']))
+    cbar.set_ticks(range(0, 1));
+    cbar.set_ticklabels('')
+
+    tick_inter = [80, 10, 0.3, 20, 1.1, 1.0]
+
+    for i in range(len(ax) - 1):
+        ax[i].set_ylim(ztop, zbot)
+        ax[i].invert_yaxis()
+        ax[i].grid(which='minor', axis='both')
+        ax[i].locator_params(axis='x', nbins=3)
+
+    tops = len(Formation_name)
+
+    for k in range(tops):
+        ax[0].set_xlabel("GR (api)", fontsize=15)
+        ax[0].set_xlim(logs.GR.min(), logs.GR.max())
+        ax[0].xaxis.set_ticks(np.arange(0, int(logs.GR.max()), tick_inter[0]))
+        ax[0].xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.0i'))
+        y = top[k] * np.ones((len(logs.GR), 1))
+        x = logs.GR
+        ax[0].plot(x, y, 'y', linewidth=1)
+        ax[0].text(200, top[k] - 10, Formation_name[k], fontsize=12, bbox=dict(facecolor='yellow', alpha=0.05))
+
+        ax[1].set_xlabel("NPLS (%)", fontsize=15)
+        ax[1].set_xlim(logs.NPLS.min(), logs.NPLS.max())
+        ax[1].xaxis.set_ticks(np.arange(0, int(logs.NPLS.max()), tick_inter[1]))
+        ax[1].xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.0i'))
+        y = top[k] * np.ones((len(logs.NPLS), 1))
+        x = logs.NPLS
+        ax[1].plot(x, y, 'y', linewidth=1)
+
+        ax[2].set_xlabel("RHOB (g/cm^{3})", fontsize=15)
+        ax[2].set_xlim(logs.RHOB.min(), logs.RHOB.max())
+        ax[2].xaxis.set_ticks(np.arange(logs.RHOB.min(), (logs.RHOB.max()), tick_inter[2]))
+        ax[2].xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
+        y = top[k] * np.ones((len(logs.RHOB), 1))
+        x = logs.RHOB
+        ax[2].plot(x, y, 'y', linewidth=1)
+
+        ax[3].set_xlabel("DT (μs/ft)", fontsize=15)
+        ax[3].set_xlim(logs.DT.min(), logs.DT.max())
+        ax[3].xaxis.set_ticks(np.arange(logs.DT.min(), int(logs.DT.max()), tick_inter[3]))
+        ax[3].xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.0i'))
+        y = top[k] * np.ones((len(logs.DT), 1))
+        x = logs.DT
+        ax[3].plot(x, y, 'y', linewidth=1)
+
+        ax[4].set_xlabel("PE (b/E)", fontsize=15)
+        ax[4].set_xlim(logs.PE.min(), logs.PE.max())
+        ax[4].xaxis.set_ticks(np.arange(logs.PE.min(), (logs.PE.max()), tick_inter[4]))
+        ax[4].xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
+        y = top[k] * np.ones((len(logs.PE), 1))
+        x = logs.PE
+        ax[4].plot(x, y, 'y', linewidth=1)
+
+        ax[5].set_xlabel("Log_ILD (Ω/m)", fontsize=15)
+        ax[5].set_xlim(logs.Log_ILD.min(), logs.PE.max())
+        ax[5].xaxis.set_ticks(np.arange(logs.Log_ILD.min(), (logs.Log_ILD.max()), tick_inter[5]))
+        ax[5].xaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
+        y = top[k] * np.ones((len(logs.Log_ILD), 1))
+        x = logs.Log_ILD
+        ax[5].plot(x, y, 'y', linewidth=1)
+
+        ax[6].set_xlabel('Facies', fontsize=15)
+
+        ax[1].set_yticklabels([]);
+        ax[2].set_yticklabels([]);
+        ax[3].set_yticklabels([])
+        ax[4].set_yticklabels([]);
+        ax[5].set_yticklabels([]);
+        ax[6].set_yticklabels([])
+        ax[6].set_xticklabels([])
+        f.suptitle('Well: %s' % logs.iloc[0]['Well name'], fontsize=14, y=0.94)
+
+    # f.tight_layout()
 
 
 def rearrange_columns(df, col_order):
