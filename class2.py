@@ -10,7 +10,7 @@ def make_facies_log_plot(logs, facies_colors, Formation_name, top):
     cmap_facies = colors.ListedColormap(
         facies_colors[0:len(facies_colors)], 'indexed')
 
-    ztop = logs.DEPT.min();
+    ztop = logs.DEPT.min()
     zbot = logs.DEPT.max()
 
     cluster = np.repeat(np.expand_dims(logs['Facies_pred'].values, 1), 100, 1)
@@ -35,7 +35,7 @@ def make_facies_log_plot(logs, facies_colors, Formation_name, top):
                                     ' 7 ', '8']))
     #     cbar.set_label((35*' ').join(['1', '2',
     #                                  '3', '4 ', ' 5 ', ' 6  ']))
-    cbar.set_ticks(range(0, 1));
+    cbar.set_ticks(range(0, 1))
     cbar.set_ticklabels('')
 
     tick_inter = [80, 10, 0.3, 20, 1.1, 1.0]
@@ -100,11 +100,11 @@ def make_facies_log_plot(logs, facies_colors, Formation_name, top):
 
         ax[6].set_xlabel('Facies', fontsize=15)
 
-        ax[1].set_yticklabels([]);
-        ax[2].set_yticklabels([]);
+        ax[1].set_yticklabels([])
+        ax[2].set_yticklabels([])
         ax[3].set_yticklabels([])
-        ax[4].set_yticklabels([]);
-        ax[5].set_yticklabels([]);
+        ax[4].set_yticklabels([])
+        ax[5].set_yticklabels([])
         ax[6].set_yticklabels([])
         ax[6].set_xticklabels([])
         f.suptitle('Well: %s' % logs.iloc[0]['Well name'], fontsize=14, y=0.94)
@@ -182,13 +182,13 @@ def facies_classification(column):
     facies = []
     for value in column:
         if np.isnan(value):
-            facies.append('None')
-        elif value < 66:
-            facies.append('sand')
-        elif 66 <= value < 86:
-            facies.append('shaly sand')
+            facies.append(np.nan)
+        elif value < 76:
+            facies.append(1)
+        elif 76 <= value < 80:
+            facies.append(2)
         else:
-            facies.append('shale')
+            facies.append(3)
 
     return facies
 
