@@ -10,14 +10,19 @@ def home(uploaded_file):
     if uploaded_file:
         st.header('Begin exploring the data using the menu on the left')
     else:
-        st.header(
+        st.header('To begin please upload a file')
+
+        st.write(
             '''
-            To begin please upload a file
             File must be in CSV format,
             columns should be renamed as follows:
             [Thomsen_delta, Anisotropy_correction, Vint_cks(m/s), Vint_seismic(m/s)].
             They should also be arranged in that particular order.
-            
+            '''
+        )
+
+        st.write(
+            '''
             This is basically a simple Streamlit app to aid visualization.
             All computations have been automated in my github page:
             https://github.com/Egbetimmy/MSc-Project
