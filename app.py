@@ -29,6 +29,14 @@ def home(uploaded_file):
             '''
         )
 
+        st.write(
+            '''
+            This is basically a simple Streamlit app to aid visualization.
+            All computations have been automated in my github page:
+            https://github.com/Egbetimmy/MSc-Project
+            '''
+        )
+
 
 # TODO
 def data_summary():
