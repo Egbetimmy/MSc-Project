@@ -13,6 +13,25 @@ def home(uploaded_file):
         st.header('To begin please upload a file')
 
         st.write(
+            """
+            Welcome to the Thomsen Delta and Anisotropy visualization app. 
+            This app is designed to help you explore and visualize the relationships between Thomsen Delta 
+            and Anisotropy data in your well logs. Thomsen Delta is a measure of the anisotropy of a rock formation 
+            and is used to describe the relationship between the horizontal and vertical velocities of compressional 
+            waves in the formation. Anisotropy, on the other hand, refers to the directional dependence of the 
+            physical properties of a rock formation.
+            """
+        )
+
+        st.write(
+            """
+            To use this app, you will need to upload a CSV file containing Thomsen Delta and Anisotropy data, 
+            with columns named "Thomsen_delta" and "Anisotropy_correction" respectively. 
+            The data should also be arranged in that particular order.
+            """
+        )
+
+        st.write(
             '''
             File must be in CSV format,
             columns should be renamed as follows:
@@ -23,17 +42,19 @@ def home(uploaded_file):
 
         st.write(
             '''
-            This is basically a simple Streamlit app to aid visualization.
-            All computations have been automated in my github page:
-            https://github.com/Egbetimmy/MSc-Project
+            Once you have uploaded your data, you can use the menu on the left to explore the data and generate 
+            visualizations. You can view basic statistics of your dataset in the "Data Summary" tab, and view the first 
+            few rows of your dataset in the "Data Header" tab. The "Data Visualization" tab allows you to create a plot 
+            of Thomsen Delta and Anisotropy as a function of depth, allowing you to visualize the relationships between 
+            these parameters in your well logs.
             '''
         )
 
         st.write(
             '''
-            This is basically a simple Streamlit app to aid visualization.
-            All computations have been automated in my github page:
-            https://github.com/Egbetimmy/MSc-Project
+            If you need more information about how to use this app, please refer to the documentation on our GitHub page 
+            at https://github.com/Egbetimmy/MSc-Project. We hope that this app will be a useful tool in your exploration of 
+            Thomsen Delta and Anisotropy data, and we welcome any feedback or suggestions you may have.
             '''
         )
 
