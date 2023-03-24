@@ -118,6 +118,12 @@ options = st.sidebar.radio('Select what you want to display:',
 if upload_file is not None:
     df = pd.read_csv(upload_file)
 
+# Add a slider widget to filter depth
+if options == 'Data Visualization':
+    depth_min = st.sidebar.slider('Minimum depth', df['Depth'].min(), df['Depth'].max(), df['Depth'].min())
+    depth_max = st.sidebar.slider('Maximum depth', df['Depth'].min(), df['Depth'].max(), df['Depth'].max())
+    displayplot(depth_min, depth_max)
+
 # Navigation options
 if options == 'Home':
     home(upload_file)
