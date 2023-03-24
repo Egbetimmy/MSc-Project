@@ -12,6 +12,14 @@ def home(uploaded_file):
     else:
         st.header('To begin please upload a file')
 
+        st.write(
+            """
+            Welcome to our well log visualization app! 
+            This app is designed to help you visualize and analyze well log data for oil and gas exploration. 
+            Here's a step-by-step guide to help you get started:
+            """
+        )
+
 
 # TODO
 def data_summary():
