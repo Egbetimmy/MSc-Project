@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
+from class2 import make_facies_log_plot
 
 st.set_page_config(layout="wide")
 
@@ -83,16 +84,14 @@ def data_header():
     st.write(df.head())
 
 
+facies_colors = ['#F4D03F', '#DC7633', '#6E2C00']
+
+
 # TODO
 def displayplot():
     st.header('Plot of Data')
 
-    fig, axes = plt.subplots(figsize=(10, 10))
-    curve_names = ['Thomsen_delta', 'Anisotropy_correction', "Vint_cks(m/s)", "Vint_seismic(m/s)"]
-
-    
-
-
+    fig = make_facies_log_plot(df, facies_colors)
 
     st.pyplot(fig)
 
