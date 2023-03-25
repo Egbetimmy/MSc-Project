@@ -86,11 +86,7 @@ def data_header():
 # TODO
 def displayplot():
     st.header('Plot of Data')
-    """
-    test = Anisotropy(df)
 
-    z = test.plot_data()
-    """
     fig, axes = plt.subplots(figsize=(10, 10))
     curve_names = ['Thomsen_delta', 'Anisotropy_correction', "Vint_cks(m/s)", "Vint_seismic(m/s)"]
 
