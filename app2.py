@@ -20,6 +20,56 @@ def home(uploaded_file):
             """
         )
 
+        st.write(
+            """
+            Uploading Data: To use this app, you'll need to upload your well log data. We accept CSV files with columns 
+            for depth, gamma ray, resistivity, and porosity. The CSV file should have a header row specifying the names 
+            of the columns. The depth column should be in meters or feet, and the data columns should be in API units. 
+            You can upload your data by clicking the "Upload Data" button on the sidebar and selecting your CSV file. 
+            Once you've uploaded your data, it will be displayed in a table below the plot.
+            """
+        )
+
+        st.write(
+            """
+            Visualizing Data: Once you've uploaded your data, you can visualize it using the interactive plot on the 
+            main page. The plot displays depth on the y-axis and the selected data column on the x-axis. You can select 
+            which data columns to display by checking the appropriate boxes in the sidebar. You can also adjust the 
+            scale of the plot using the slider at the bottom. To zoom in or out of the plot, click and drag on the 
+            x-axis or use the scroll wheel on your mouse. To pan the plot, click and drag on the plot.
+            """
+        )
+
+        st.write(
+            """
+            Analyzing Data: The app also provides a few tools to help you analyze your well log data. You can view 
+            statistical summaries for each data column by clicking the "Show Stats" button in the sidebar. The app will 
+            display the mean, median, standard deviation, minimum, and maximum values for the selected column. You can 
+            also filter your data by depth range or by specific values using the filter options in the sidebar. 
+            To filter by depth range, enter the minimum and maximum depth values in the "Depth Range" fields and click 
+            the "Filter" button. To filter by specific values, enter the values in the appropriate fields and click the 
+            "Filter" button. The app will display only the rows of the table that match the filter criteria.
+            """
+        )
+
+        st.write(
+            """
+            Documentation: If you need more information about the app or the data format, you can refer to our 
+            documentation. Click the "Documentation" button in the sidebar to access our user guide and data format 
+            specifications. The user guide provides detailed instructions on how to use the app, including screenshots 
+            and examples. The data format specifications provide information on the required format for the CSV file, 
+            including the column names and units.
+            """
+        )
+
+        st.write(
+            """
+            We hope you find our app useful for your well log analysis needs. If you have any questions or feedback, 
+            please don't hesitate to contact us using the contact information provided in the "About" section of the 
+            sidebar.
+            """
+        )
+
 
 # TODO
 def data_summary():
