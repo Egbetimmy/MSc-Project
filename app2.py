@@ -90,39 +90,9 @@ def displayplot():
     fig, axes = plt.subplots(figsize=(10, 10))
     curve_names = ['Thomsen_delta', 'Anisotropy_correction', "Vint_cks(m/s)", "Vint_seismic(m/s)"]
 
-    # TODO: try to make it just two plots. Try it out and see how it works.
+    
 
-    ax1 = plt.subplot2grid((1, 3), (0, 0), rowspan=1, colspan=1)
-    ax2 = plt.subplot2grid((1, 3), (0, 1), rowspan=1, colspan=1)
-    ax3 = plt.subplot2grid((1, 3), (0, 2), rowspan=1, colspan=1)
-    ax4 = ax3.twiny()
 
-    ax1.plot('Thomsen_delta', 'Depth', data=df, color="green", lw=0.5)
-    ax1.set_xlim(df.Thomsen_delta.min(), df.Thomsen_delta.max())
-
-    ax2.plot('Anisotropy_correction', 'Depth', data=df, color="red", lw=0.5)
-    ax2.set_xlim(df.Anisotropy_correction.min(), df.Anisotropy_correction.max())
-
-    ax3.plot('Vint_cks(m/s)', 'Depth', data=df, color="blue", lw=0.5)
-    ax3.set_xlim(df['Vint_cks(m/s)'].min(), df['Vint_cks(m/s)'].max())
-
-    ax4.plot('Vint_seismic(m/s)', 'Depth', data=df, color="red", lw=0.5)
-    ax4.set_xlim(df['Vint_cks(m/s)'].min(), df['Vint_cks(m/s)'].max())
-
-    for i, ax in enumerate(fig.axes):
-        ax.set_ylim(2154, 1350)
-
-        ax.xaxis.set_ticks_position("top")
-        ax.xaxis.set_label_position("top")
-        ax.set_xlabel(curve_names[i])
-
-        if i == 3:
-            ax.spines["top"].set_position(("axes", 1.08))
-        else:
-            ax.grid()
-
-    for ax in [ax2, ax3, ax4]:
-        plt.setp(ax.get_yticklabels(), visible=False)
 
     st.pyplot(fig)
 
