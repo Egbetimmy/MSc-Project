@@ -5,14 +5,14 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
 
 
-def make_facies_log_plot(logs, facies_colors):
+def make_facies_log_plot(logs, facies_colors, depth_min, depth_max):
     # make sure logs are sorted by depth
     logs = logs.sort_values(by='Depth')
     cmap_facies = colors.ListedColormap(
         facies_colors[0:len(facies_colors)], 'indexed')
 
-    ztop = logs.Depth.min();
-    zbot = logs.Depth.max()
+    ztop = depth_min
+    zbot = depth_max
 
     cluster = np.repeat(np.expand_dims(logs['Facies'].values, 1), 100, 1)
 
@@ -29,7 +29,7 @@ def make_facies_log_plot(logs, facies_colors):
     cax = divider.append_axes("right", size="25%", pad=0.05)
     cbar = plt.colorbar(im, cax=cax)
     cbar.set_label((5 * ' ').join(['sand', 'shaly sand', 'shale']))
-    cbar.set_ticks(range(0, 1));
+    cbar.set_ticks(range(0, 1))
     cbar.set_ticklabels('')
     for i in range(len(ax) - 1):
         ax[i].set_ylim(ztop, zbot)
