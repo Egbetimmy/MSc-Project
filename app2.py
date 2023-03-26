@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 import streamlit as st
 from class2 import make_facies_log_plot
 
+showWarningOnDirectExecution = False
+
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
 st.set_page_config(layout="wide")
 
 
@@ -91,7 +95,7 @@ facies_colors = ['#F4D03F', '#DC7633', '#6E2C00']
 def displayplot():
     st.header('Plot of Data')
 
-    fig = make_facies_log_plot(df, facies_colors)
+    fig = make_facies_log_plot(df, facies_colors, 8300, 8500)
 
     st.pyplot(fig)
 
