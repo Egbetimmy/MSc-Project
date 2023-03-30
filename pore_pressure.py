@@ -1,4 +1,16 @@
 def eaton_method(Vp, Vs, phi):
+    """
+    This function calculates pore pressure using Eaton's method, given inputs of P-wave velocity (Vp),
+    S-wave velocity (Vs), and porosity (phi).
+
+    Parameters:
+    Vp (float): P-wave velocity in meters per second (m/s).
+    Vs (float): S-wave velocity in meters per second (m/s).
+    phi (float): Porosity expressed as a decimal.
+
+    Returns:
+    pp (float): Pore pressure in pascals (Pa).
+    """
 
     # Define constants
     rho_w = 1000  # density of water, kg/m^3
