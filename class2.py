@@ -2,13 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.colors as colors
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-import matplotlib.ticker as ticker
 
 
-
-
-
-# %matplotlib inline
 class Petrophysics:
     """
         Need to test the outcomes
@@ -466,6 +461,7 @@ class Petrophysics:
             ax.spines["top"].set_position(("axes", 1.02))
 
         return plt.tight_layout()
+
 
 def make_facies_log_plot(logs, facies_colors, depth_min, depth_max):
     """
