@@ -341,6 +341,17 @@ class Petrophysics:
         return self.df
 
     def plot(self):
+        """
+            Plots a well log using matplotlib.
+
+            Parameters:
+            -----------
+            None
+
+            Returns:
+            --------
+            None
+        """
         fig, ax = plt.subplots(figsize=(15, 10))
 
         # Set up the plot axes
@@ -460,7 +471,7 @@ class Petrophysics:
             ax.xaxis.set_label_position("top")
             ax.spines["top"].set_position(("axes", 1.02))
 
-        return plt.tight_layout()
+        plt.tight_layout()
 
 
 def make_facies_log_plot(logs, facies_colors, depth_min, depth_max):
