@@ -27,6 +27,19 @@ def Bowers_method(Vp, Vs, phi):
 
 
 def Matthews_Kelly_method(depth, rho):
+    """
+    Function: Matthews_Kelly_method
+
+    Description: Calculates pore pressure using the Matthews-Kelly method.
+
+    Inputs:
+    - depth: depth of the formation, in meters
+    - rho: bulk density of the formation, in kg/m^3
+
+    Outputs:
+    - pp: pore pressure, in Pascals
+
+    """
 
     # Define constants
     rho_w = 1000  # density of water, kg/m^3
