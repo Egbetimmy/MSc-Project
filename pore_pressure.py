@@ -12,6 +12,17 @@ def eaton_method(Vp, Vs, phi):
 
 
 def Bowers_method(Vp, Vs, phi):
+    """
+    Calculates pore pressure using Bowers' method.
+
+    Args:
+    Vp: P-wave velocity, m/s.
+    Vs: S-wave velocity, m/s.
+    phi: Porosity of the formation, decimal fraction.
+
+    Returns:
+    pp: Pore pressure, Pa.
+    """
 
     # Define constants
     rho_b = 2.65  # bulk density of the formation, g/cm^3
