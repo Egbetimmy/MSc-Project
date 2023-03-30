@@ -1,11 +1,6 @@
 import math
 
 
-def true_vertical_depth(measured_depth, angle_of_inclination):
-    tvd = round(measured_depth * math.cos(math.radians(angle_of_inclination)), 2)
-    return tvd
-
-
 class WellMetrics:
     """
     Conversion functions
@@ -189,3 +184,19 @@ class WellMetrics:
 
         if inputunits.lower() not in units or outputunits.lower() not in units:
             raise Exception("Enter a valid temperature inputunit or outputunit value. Must be: c, f or k")
+
+
+def true_vertical_depth(measured_depth: float, angle_of_inclination: float) -> float:
+    """
+    Calculate the true vertical depth based on the measured depth and angle of inclination.
+
+    Args:
+        measured_depth (float): Measured depth in feet.
+        angle_of_inclination (float): Angle of inclination in degrees.
+
+    Returns:
+        float: The true vertical depth in feet, rounded to 2 decimal places.
+    """
+    tvd = round(measured_depth * math.cos(math.radians(angle_of_inclination)), 2)
+    return tvd
+
