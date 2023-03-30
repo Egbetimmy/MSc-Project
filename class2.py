@@ -6,6 +6,31 @@ import matplotlib.ticker as ticker
 
 
 def make_facies_log_plot(logs, facies_colors, depth_min, depth_max):
+    """
+    Create a facies log plot with various well log curves and facies annotations.
+
+    Args:
+    - logs: Pandas DataFrame containing the following columns:
+        * Depth: Depth in feet.
+        * GR: Gamma ray.
+        * ILD_log10: Resistivity logging curve.
+        * NPHI: Neutron porosity.
+        * RHOB: Bulk density.
+        * DT: Sonic travel time.
+        * Facies: Facies class (1=sandstone, 2=shaly sandstone, 3=shale).
+    - facies_colors: List of RGB tuples representing the colors to be used for each facies class.
+    - depth_min: Minimum depth to be displayed on the plot.
+    - depth_max: Maximum depth to be displayed on the plot.
+
+    Returns:
+    - fig: Matplotlib Figure object containing the facies log plot.
+
+    Example usage:
+    >>> fig = make_facies_log_plot(logs, [(0, 0, 1), (0, 1, 1), (1, 1, 0)], 2000, 3000)
+    >>> fig.savefig('facies_log_plot.png')
+
+    """
+
     # make sure logs are sorted by depth
     logs = logs.sort_values(by='Depth')
     cmap_facies = colors.ListedColormap(
@@ -44,19 +69,7 @@ def make_facies_log_plot(logs, facies_colors, depth_min, depth_max):
     ax[1].set_xticks([0.2, 2, 20, 200, 2000])
     ax[1].semilogx()
     ax[2].set_xlabel("NPHI")
-    ax[2].set_xlim(logs.NPHI.min(), logs.NPHI.max())
-    ax[3].set_xlabel("RHOB")
-    ax[3].set_xlim(logs.RHOB.min(), logs.RHOB.max())
-    ax[4].set_xlabel("DT")
-    ax[4].set_xlim(logs.DT.min(), logs.DT.max())
-    ax[5].set_xlabel('Facies')
 
-    ax[1].set_yticklabels([])
-    ax[2].set_yticklabels([])
-    ax[3].set_yticklabels([])
-    ax[4].set_yticklabels([])
-    ax[5].set_yticklabels([])
-    ax[5].set_xticklabels([])
     # f.suptitle('Well: %s'%logs.iloc[0]['Well Name'], fontsize=14,y=0.94)
 
 
