@@ -5,171 +5,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.ticker as ticker
 
 
-def make_facies_log_plot(logs, facies_colors, depth_min, depth_max):
-    """
-    Create a facies log plot with various well log curves and facies annotations.
 
-    Args:
-    - logs: Pandas DataFrame containing the following columns:
-        * Depth: Depth in feet.
-        * GR: Gamma ray.
-        * ILD_log10: Resistivity logging curve.
-        * NPHI: Neutron porosity.
-        * RHOB: Bulk density.
-        * DT: Sonic travel time.
-        * Facies: Facies class (1=sandstone, 2=shaly sandstone, 3=shale).
-    - facies_colors: List of RGB tuples representing the colors to be used for each facies class.
-    - depth_min: Minimum depth to be displayed on the plot.
-    - depth_max: Maximum depth to be displayed on the plot.
-
-    Returns:
-    - fig: Matplotlib Figure object containing the facies log plot.
-
-    Example usage:
-    >>> fig = make_facies_log_plot(logs, [(0, 0, 1), (0, 1, 1), (1, 1, 0)], 2000, 3000)
-    >>> fig.savefig('facies_log_plot.png')
-
-    """
-
-    # make sure logs are sorted by depth
-    logs = logs.sort_values(by='Depth')
-    cmap_facies = colors.ListedColormap(
-        facies_colors[0:len(facies_colors)], 'indexed')
-
-    ztop = depth_min
-    zbot = depth_max
-
-    cluster = np.repeat(np.expand_dims(logs['Facies'].values, 1), 100, 1)
-
-    f, ax = plt.subplots(nrows=1, ncols=6, figsize=(12, 6))
-    ax[0].plot(logs.GR, logs.Depth, '-g')
-    ax[1].plot(logs.Log_ILD, logs.Depth, '-')
-    ax[2].plot(logs.NPHI, logs.Depth, '-', color='0.40')
-    ax[3].plot(logs.RHOB, logs.Depth, '-', color='r')
-    ax[4].plot(logs.DT, logs.Depth, '-', color='black')
-    im = ax[5].imshow(cluster, interpolation='none', aspect='auto',
-                      cmap=cmap_facies, vmin=1, vmax=3)
-
-    divider = make_axes_locatable(ax[5])
-    cax = divider.append_axes("right", size="25%", pad=0.05)
-    cbar = plt.colorbar(im, cax=cax)
-    cbar.set_label((5 * ' ').join(['sand', 'shaly sand', 'shale']))
-    cbar.set_ticks(range(0, 1))
-    cbar.set_ticklabels('')
-    for i in range(len(ax) - 1):
-        ax[i].set_ylim(ztop, zbot)
-        ax[i].invert_yaxis()
-        ax[i].grid()
-        ax[i].locator_params(axis='x', nbins=3)
-
-    ax[0].set_xlabel("GR")
-    ax[0].set_xlim(logs.GR.min(), logs.GR.max())
-    ax[1].set_xlabel("ILD_log10")
-    ax[1].set_xlim(0.2, 2000)
-    ax[1].set_xticks([0.2, 2, 20, 200, 2000])
-    ax[1].semilogx()
-    ax[2].set_xlabel("NPHI")
-
-    # f.suptitle('Well: %s'%logs.iloc[0]['Well Name'], fontsize=14,y=0.94)
-
-
-def rearrange_columns(df, col_order):
-    """
-    Rearrange columns in a pandas dataframe based on a given list of column names.
-
-    Parameters
-    -----------
-    df : pandas.DataFrame
-        Input dataframe
-    col_order : list
-        List of column names in the order they should be arranged
-
-    Returns
-    --------
-    df : pandas.DataFrame
-        Dataframe with rearranged columns
-    """
-    # Get a list of all columns in the dataframe
-    cols = df.columns.tolist()
-
-    # Make sure all the columns in col_order are present in the dataframe
-    for col in col_order:
-        if col not in cols:
-            raise ValueError(f"{col} not found in dataframe columns")
-
-    # Rearrange the columns based on col_order
-    df = df.reindex(columns=col_order)
-
-    return df
-
-
-def rename_columns(df, old_names, new_names):
-    """
-    Rename columns in a dataframe.
-
-    Parameters
-    ----------
-    df (pd.DataFrame):
-        the input dataframe
-    old_names (list):
-        a list of the current column names
-    new_names (list):
-        a list of the new column names, in the same order as old_names
-
-    Returns
-    ----------
-    pd.DataFrame:
-        the renamed dataframe
-    """
-    renamed_df = df.rename(columns=dict(zip(old_names, new_names)))
-    return renamed_df
-
-
-def facies_classification(column):
-    """
-        Classify lithofacies based on gamma ray values.
-
-        Parameters
-        ----------
-        df (pd.DataFrame):
-            Dataframe containing gamma ray values.
-
-        Returns
-        ----------
-        pd.DataFrame:
-            Dataframe with facies classification.
-        """
-
-    facies = []
-    for value in column:
-        if np.isnan(value):
-            facies.append(np.nan)
-        elif value < 76:
-            facies.append(1)
-        elif 76 <= value < 80:
-            facies.append(2)
-        else:
-            facies.append(3)
-
-    return facies
-
-
-def vs_from_vp(df):
-    """
-    Calculates S-wave velocity (m/s) from compressional wave velocity using Gardner equation.
-
-    Parameters
-    ----------
-    df:
-        pandas DataFrame containing compressional wave velocity (m/s) in column 'vp'
-
-    Returns
-    ----------
-    list of S-wave velocities (m/s)
-    """
-    vp = df['vp']
-    vs = round(vp / (2 ** 0.5), 4)
-    return vs.tolist()
 
 
 # %matplotlib inline
@@ -630,3 +466,169 @@ class Petrophysics:
             ax.spines["top"].set_position(("axes", 1.02))
 
         return plt.tight_layout()
+
+def make_facies_log_plot(logs, facies_colors, depth_min, depth_max):
+    """
+    Create a facies log plot with various well log curves and facies annotations.
+
+    Args:
+    - logs: Pandas DataFrame containing the following columns:
+        * Depth: Depth in feet.
+        * GR: Gamma ray.
+        * ILD_log10: Resistivity logging curve.
+        * NPHI: Neutron porosity.
+        * RHOB: Bulk density.
+        * DT: Sonic travel time.
+        * Facies: Facies class (1=sandstone, 2=shaly sandstone, 3=shale).
+    - facies_colors: List of RGB tuples representing the colors to be used for each facies class.
+    - depth_min: Minimum depth to be displayed on the plot.
+    - depth_max: Maximum depth to be displayed on the plot.
+
+    Returns:
+    - fig: Matplotlib Figure object containing the facies log plot.
+
+    Example usage:
+    >>> fig = make_facies_log_plot(logs, [(0, 0, 1), (0, 1, 1), (1, 1, 0)], 2000, 3000)
+    >>> fig.savefig('facies_log_plot.png')
+
+    """
+
+    # make sure logs are sorted by depth
+    logs = logs.sort_values(by='Depth')
+    cmap_facies = colors.ListedColormap(
+        facies_colors[0:len(facies_colors)], 'indexed')
+
+    ztop = depth_min
+    zbot = depth_max
+
+    cluster = np.repeat(np.expand_dims(logs['Facies'].values, 1), 100, 1)
+
+    f, ax = plt.subplots(nrows=1, ncols=6, figsize=(12, 6))
+    ax[0].plot(logs.GR, logs.Depth, '-g')
+    ax[1].plot(logs.Log_ILD, logs.Depth, '-')
+    ax[2].plot(logs.NPHI, logs.Depth, '-', color='0.40')
+    ax[3].plot(logs.RHOB, logs.Depth, '-', color='r')
+    ax[4].plot(logs.DT, logs.Depth, '-', color='black')
+    im = ax[5].imshow(cluster, interpolation='none', aspect='auto',
+                      cmap=cmap_facies, vmin=1, vmax=3)
+
+    divider = make_axes_locatable(ax[5])
+    cax = divider.append_axes("right", size="25%", pad=0.05)
+    cbar = plt.colorbar(im, cax=cax)
+    cbar.set_label((5 * ' ').join(['sand', 'shaly sand', 'shale']))
+    cbar.set_ticks(range(0, 1))
+    cbar.set_ticklabels('')
+    for i in range(len(ax) - 1):
+        ax[i].set_ylim(ztop, zbot)
+        ax[i].invert_yaxis()
+        ax[i].grid()
+        ax[i].locator_params(axis='x', nbins=3)
+
+    ax[0].set_xlabel("GR")
+    ax[0].set_xlim(logs.GR.min(), logs.GR.max())
+    ax[1].set_xlabel("ILD_log10")
+    ax[1].set_xlim(0.2, 2000)
+    ax[1].set_xticks([0.2, 2, 20, 200, 2000])
+    ax[1].semilogx()
+    ax[2].set_xlabel("NPHI")
+
+    # f.suptitle('Well: %s'%logs.iloc[0]['Well Name'], fontsize=14,y=0.94)
+
+
+def rearrange_columns(df, col_order):
+    """
+    Rearrange columns in a pandas dataframe based on a given list of column names.
+
+    Parameters
+    -----------
+    df : pandas.DataFrame
+        Input dataframe
+    col_order : list
+        List of column names in the order they should be arranged
+
+    Returns
+    --------
+    df : pandas.DataFrame
+        Dataframe with rearranged columns
+    """
+    # Get a list of all columns in the dataframe
+    cols = df.columns.tolist()
+
+    # Make sure all the columns in col_order are present in the dataframe
+    for col in col_order:
+        if col not in cols:
+            raise ValueError(f"{col} not found in dataframe columns")
+
+    # Rearrange the columns based on col_order
+    df = df.reindex(columns=col_order)
+
+    return df
+
+
+def rename_columns(df, old_names, new_names):
+    """
+    Rename columns in a dataframe.
+
+    Parameters
+    ----------
+    df (pd.DataFrame):
+        the input dataframe
+    old_names (list):
+        a list of the current column names
+    new_names (list):
+        a list of the new column names, in the same order as old_names
+
+    Returns
+    ----------
+    pd.DataFrame:
+        the renamed dataframe
+    """
+    renamed_df = df.rename(columns=dict(zip(old_names, new_names)))
+    return renamed_df
+
+
+def facies_classification(column):
+    """
+        Classify lithofacies based on gamma ray values.
+
+        Parameters
+        ----------
+        df (pd.DataFrame):
+            Dataframe containing gamma ray values.
+
+        Returns
+        ----------
+        pd.DataFrame:
+            Dataframe with facies classification.
+        """
+
+    facies = []
+    for value in column:
+        if np.isnan(value):
+            facies.append(np.nan)
+        elif value < 76:
+            facies.append(1)
+        elif 76 <= value < 80:
+            facies.append(2)
+        else:
+            facies.append(3)
+
+    return facies
+
+
+def vs_from_vp(df):
+    """
+    Calculates S-wave velocity (m/s) from compressional wave velocity using Gardner equation.
+
+    Parameters
+    ----------
+    df:
+        pandas DataFrame containing compressional wave velocity (m/s) in column 'vp'
+
+    Returns
+    ----------
+    list of S-wave velocities (m/s)
+    """
+    vp = df['vp']
+    vs = round(vp / (2 ** 0.5), 4)
+    return vs.tolist()
