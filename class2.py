@@ -638,4 +638,4 @@ def vs_from_vp(df):
     """
     vp = df['vp']
     vs = round(vp / (2 ** 0.5), 4)
-    return vs.tolist()
+    return vs
