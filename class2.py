@@ -623,19 +623,22 @@ def facies_classification(column):
     return facies
 
 
-def vs_from_vp(df):
+def vp_to_vs(df, vp_col):
     """
     Calculates S-wave velocity (m/s) from compressional wave velocity using Gardner equation.
 
     Parameters
     ----------
-    df:
-        pandas DataFrame containing compressional wave velocity (m/s) in column 'vp'
+    df : pandas DataFrame
+        The input DataFrame containing compressional wave velocity data.
+    vp_col : str
+        The name of the column in `df` containing the compressional wave velocity data.
 
     Returns
     ----------
-    list of S-wave velocities (m/s)
+    pandas Series
+        The S-wave velocity data, calculated using the Gardner equation.
     """
-    vp = df['vp']
+    vp = df[vp_col]
     vs = round(vp / (2 ** 0.5), 4)
     return vs
