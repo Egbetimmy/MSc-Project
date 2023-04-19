@@ -316,7 +316,7 @@ class Petrophysics:
 
     def permeability(self):
         """
-        Calculate permeability using porosity and irreducible water saturation.
+        Calculate permeability using Owolabi et al., (1994).
 
         Parameters
         ----------
