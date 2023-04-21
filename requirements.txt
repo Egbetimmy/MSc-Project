@@ -11,3 +11,4 @@ scikit-learn~=1.2.2
 # !pip install chart-studio --upgrade
 # !pip install pyarrow --upgrade
 # !pip install cufflinks --upgrade
+seaborn~=0.12.2
