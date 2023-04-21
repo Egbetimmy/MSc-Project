@@ -45,7 +45,7 @@ class Petrophysics:
 
         return self.df
 
-    def density_porosity(self, x, matrix_density, fluid_density):
+    def density_porosity(self, x, sand_matrix_density, shale_matrix_density, fluid_density):
         """
         Calculates density porosity from density data.
 
@@ -53,8 +53,10 @@ class Petrophysics:
         ----------
         x : int
             Column index of the density data in the dataframe.
-        matrix_density : float
-            Matrix density (g/cc).
+        sand_matrix_density : float
+            Matrix density for sand (g/cc).
+        shale_matrix_density : float
+            Matrix density for shale (g/cc).
         fluid_density : float
             Fluid density (g/cc).
 
@@ -64,11 +66,13 @@ class Petrophysics:
             A dataframe containing the calculated density porosity data.
         """
 
-        # Extract density data from dataframe
+        # Extract density data and GR from dataframe
         density = self.df.iloc[:, x]
+        GR = self.df['GR']
 
         # Calculate density porosity data
-        porosity = (matrix_density - density) / (matrix_density - fluid_density)
+        porosity = np.where(GR < 75, (sand_matrix_density - density) / (sand_matrix_density - fluid_density),
+                            (shale_matrix_density - density) / (shale_matrix_density - fluid_density))
 
         # Round density porosity data to four decimal places
         porosity = porosity.round(4)
@@ -305,7 +309,7 @@ class Petrophysics:
         """
 
         # Extract input columns from dataframe
-        formation_factor = self.df[self.df['formation_factor']]
+        formation_factor = self.df['formation_factor']
 
         # Calculate irreducible water saturation
         swirr = (formation_factor / 2000) ** (1 / 2)
