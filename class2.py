@@ -12,7 +12,7 @@ class Petrophysics:
     def __init__(self, df):
         self.df = df
 
-    def shale_volume(self, x):
+    def gamma_ray_index(self, x):
         """
         Calculates shale volume from gamma ray data.
 
@@ -35,14 +35,33 @@ class Petrophysics:
         gamma_ray_min = gamma_ray.quantile(q=0.01)
 
         # Calculate shale volume data
-        vshale = (gamma_ray - gamma_ray_min) / (gamma_ray_max - gamma_ray_min)
+        GRI = (gamma_ray - gamma_ray_min) / (gamma_ray_max - gamma_ray_min)
 
         # Round shale volume data to four decimal places
-        vshale = vshale.round(4)
+        GRI = GRI.round(4)
 
         # Create a new column in the dataframe for the shale volume data
-        self.df['vshale'] = vshale
+        self.df['GRI'] = GRI
 
+        return self.df
+
+    def vshale_linear(self):
+        """
+        Calculates Vshale from gamma ray using the linear formulation.
+
+        Parameters
+        ----------
+        GR : array_like
+            Gamma ray log values.
+
+        Returns
+        -------
+        array_like
+            Vshale values calculated using the linear formulation.
+        """
+        GRI = self.df['GRI']
+        VShale = 0.083 * ((2 ** (3.7 * GRI)) - 1)
+        self.df['VShale'] = VShale
         return self.df
 
     def density_porosity(self, x, sand_matrix_density, shale_matrix_density, fluid_density):
