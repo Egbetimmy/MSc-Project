@@ -200,7 +200,7 @@ class Petrophysics:
         effective_porosity = phit - vclay * phitclay
 
         # Create a new column in the dataframe for the effective porosity
-        self.df['effective porosity'] = effective_porosity
+        self.df[' PHIeff'] = effective_porosity
 
         return self.df
 
