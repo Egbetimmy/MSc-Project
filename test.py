@@ -23,7 +23,7 @@ def test_model_prediction():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     # Train a random forest regressor model
-    with open('model_pickle', 'rb') as file:
+    with open('models/model_pickle', 'rb') as file:
         rf = pickle.load(file)
 
     # Make predictions on test data
@@ -81,7 +81,7 @@ def test_neural_network():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     # Load the trained neural network model
-    with open('model_pickle', 'rb') as file:
+    with open('models/model_pickle', 'rb') as file:
         nn = pickle.load(file)
 
     # Make predictions on the test data
