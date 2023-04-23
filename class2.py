@@ -61,7 +61,7 @@ class Petrophysics:
         """
         GRI = self.df['GRI']
         VShale = 0.083 * ((2 ** (3.7 * GRI)) - 1)
-        self.df['VShale'] = VShale
+        self.df['vshale'] = VShale
         return self.df
 
     def density_porosity(self, x, sand_matrix_density, shale_matrix_density, fluid_density):
@@ -200,7 +200,7 @@ class Petrophysics:
         effective_porosity = phit - vclay * phitclay
 
         # Create a new column in the dataframe for the effective porosity
-        self.df[' PHIeff'] = effective_porosity
+        self.df['PHIeff'] = effective_porosity
 
         return self.df
 
