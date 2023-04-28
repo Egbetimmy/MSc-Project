@@ -1,6 +1,55 @@
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.metrics import r2_score
+import joblib
+
+
+def evaluate_models(models, model_names, new_data, target):
+    """
+    Evaluates a list of saved models on a new dataframe and returns a dataframe containing the model names
+    and their corresponding R-squared values on the new data.
+
+    Parameters
+    ----------
+    models : list
+        A list of saved models.
+    model_names : list
+        A list of model names corresponding to the saved models.
+    new_data : pandas.DataFrame
+        A new dataframe to evaluate the models on.
+    target : str
+        The name of the target variable in the new dataframe.
+
+    Returns
+    -------
+    pandas.DataFrame
+        A dataframe containing the model names and their corresponding R-squared values on the new data.
+    """
+
+    # Initialize an empty list to store results
+    results = []
+
+    # Loop through each model and evaluate it on the new data
+    for i, model in enumerate(models):
+        # Load the model from disk
+        model = joblib.load(model)
+
+        # Make predictions on the new data
+        y_pred = model.predict(new_data.drop(columns=[target]))
+
+        # Calculate R-squared on the new data
+        r2 = r2_score(new_data[target], y_pred)
+
+        # Add model name and R-squared to the results list
+        results.append([model_names[i], r2])
+
+    # Create a dataframe from the results list
+    results_df = pd.DataFrame(results, columns=['Model', 'R-squared'])
+
+    return results_df
+
 
 
 def scatter_plot(y_true, y_pred, title):
