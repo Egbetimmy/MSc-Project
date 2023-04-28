@@ -6,6 +6,29 @@ from sklearn.metrics import r2_score
 import joblib
 
 
+def calculate_r2(actual_values, predicted_values):
+    """
+    Calculates R-squared value given actual and predicted values.
+
+    Parameters
+    ----------
+    actual_values : pandas.Series
+        A series containing the actual values.
+    predicted_values : pandas.Series
+        A series containing the predicted values.
+
+    Returns
+    -------
+    float
+        The R-squared value.
+    """
+    mean_actual = np.mean(actual_values)
+    ss_total = np.sum((actual_values - mean_actual)**2)
+    ss_residual = np.sum((actual_values - predicted_values)**2)
+    r2 = 1 - (ss_residual / ss_total)
+    return r2
+
+
 def evaluate_models(models, model_names, new_data, target):
     """
     Evaluates a list of saved models on a new dataframe and returns a dataframe containing the model names
