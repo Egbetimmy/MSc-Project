@@ -12,3 +12,4 @@ scikit-learn~=1.2.2
 # !pip install pyarrow --upgrade
 # !pip install cufflinks --upgrade
 seaborn~=0.12.2
+joblib~=1.2.0
