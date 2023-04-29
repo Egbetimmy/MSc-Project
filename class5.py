@@ -23,8 +23,8 @@ def calculate_r2(actual_values, predicted_values):
         The R-squared value.
     """
     mean_actual = np.mean(actual_values)
-    ss_total = np.sum((actual_values - mean_actual)**2)
-    ss_residual = np.sum((actual_values - predicted_values)**2)
+    ss_total = np.sum((actual_values - mean_actual) ** 2)
+    ss_residual = np.sum((actual_values - predicted_values) ** 2)
     r2 = 1 - (ss_residual / ss_total)
     return r2
 
@@ -72,7 +72,6 @@ def evaluate_models(models, model_names, new_data, target):
     results_df = pd.DataFrame(results, columns=['Model', 'R-squared'])
 
     return results_df
-
 
 
 def scatter_plot(y_true, y_pred, title):
