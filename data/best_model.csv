@@ -1,6 +1,6 @@
 model,best_params,best_score,RMSE,R-squared
-svm,"{'svr__C': 10, 'svr__gamma': 'auto', 'svr__kernel': 'poly'}",0.241979745807621,1493.4451921419395,0.08126777060421919
-random_forest,"{'max_depth': 10, 'n_estimators': 50}",0.6865340303325211,585.3734827164087,0.8588514360894965
-decision_tree,"{'max_depth': 15, 'min_samples_split': 2}",0.6930356751550513,204.67141140849898,0.9827446114676192
-neural_network,"{'activation': 'tanh', 'hidden_layer_sizes': (20,)}",-0.0009321520534461669,1558.8938627777854,-0.0010216447879094481
-gradient_boosting,"{'learning_rate': 0.2, 'max_depth': 3, 'n_estimators': 100}",0.7119572606333858,246.19738622621765,0.9750323740453338
+svm,"{'svr__C': 10, 'svr__gamma': 'scale', 'svr__kernel': 'poly'}",0.17669729983263224,1425.5423191729353,0.08162268704305653
+random_forest,"{'max_depth': 10, 'n_estimators': 150}",0.6849064425968969,762.484097019789,0.7372622369851689
+decision_tree,"{'max_depth': 10, 'min_samples_split': 2}",0.7045599847351632,383.5657515533456,0.9335124144440541
+neural_network,"{'activation': 'logistic', 'hidden_layer_sizes': (10,), 'max_iter': 1000}",-0.0012626170268984272,1487.7100465684025,-0.0002245488291245934
+gradient_boosting,"{'learning_rate': 0.2, 'max_depth': 3, 'n_estimators': 50}",0.7210606043518234,375.1071521912715,0.9364125209417741
