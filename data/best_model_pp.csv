@@ -1,0 +1,6 @@
+model,best_params,best_score,RMSE,R-squared
+svm,"{'svr__C': 10, 'svr__gamma': 'scale', 'svr__kernel': 'linear'}",0.42328592273769666,375672.50694184395,0.5049178758682172
+random_forest,"{'max_depth': 30, 'n_estimators': 150}",0.9986590020822975,15175.88269574482,0.9991920837535273
+decision_tree,"{'max_depth': 15, 'min_samples_split': 5}",0.9968244686153188,22144.384502368073,0.9982797734473515
+neural_network,"{'activation': 'relu', 'hidden_layer_sizes': (30,)}",0.8401234623789353,208367.97003337558,0.8476928326386454
+gradient_boosting,"{'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 150}",0.9990873132039626,15103.999692223035,0.9991997192770374
