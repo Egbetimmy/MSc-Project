@@ -8,25 +8,28 @@ import joblib
 
 def calculate_r2(actual_values, predicted_values):
     """
-    Calculates R-squared value given actual and predicted values.
+    Calculates R-squared values for multiple predicted value columns given an actual value column.
 
     Parameters
     ----------
     actual_values : pandas.Series
         A series containing the actual values.
-    predicted_values : pandas.Series
-        A series containing the predicted values.
+    predicted_values : pandas.DataFrame
+        A DataFrame containing the predicted value columns.
 
     Returns
     -------
-    float
-        The R-squared value.
+    dict
+        A dictionary containing the R-squared values for each predicted value column.
     """
-    mean_actual = np.mean(actual_values)
-    ss_total = np.sum((actual_values - mean_actual) ** 2)
-    ss_residual = np.sum((actual_values - predicted_values) ** 2)
-    r2 = 1 - (ss_residual / ss_total)
-    return r2
+    r2_values = {}
+    for column in predicted_values.columns:
+        mean_actual = np.mean(actual_values)
+        ss_total = np.sum((actual_values - mean_actual) ** 2)
+        ss_residual = np.sum((actual_values - predicted_values[column]) ** 2)
+        r2 = 1 - (ss_residual / ss_total)
+        r2_values[column] = r2
+    return r2_values
 
 
 def evaluate_models(models, model_names, new_data, target):
@@ -100,3 +103,45 @@ def line_plot(y_true, y_pred, title):
     plt.title(title)
 
     plt.show()
+
+
+def plot_predictions(df, model_columns, target):
+    # Set the figure size
+    plt.figure(figsize=(12, 6))
+
+    # Plot the actual values
+    sns.lineplot(data=df, x=df.index, y=target, label='Actual')
+
+    # Plot the predicted values for each model
+    for column in model_columns:
+        # Get the predicted values for the model
+        y_pred = df[column]
+
+        # Plot the predicted values as a scatter plot with a dotted line style
+        sns.lineplot(data=df, x=df.index, y=y_pred, label=column, linestyle='dotted')
+
+    # Set the plot title and axis labels
+    plt.title('Actual vs Predicted Values')
+    plt.xlabel('Date')
+    plt.ylabel(target)
+
+    # Show the legend
+    plt.legend()
+
+
+
+'''
+# Define a list of saved model paths
+model_paths = [
+    'models/decision_tree_best_model.pkl', 'models/gradient_boosting_best_model.pkl', 'models/random_forest_best_model.pkl'
+]
+
+# Define a list of model names
+model_names = ['decision_tree', 'gradient_boosting', 'random_forest']
+
+# Evaluate the models on the new data
+results_df = evaluate_models(model_paths, model_names, X, 'Actual Permeability')
+
+# Print the results
+print(results_df)
+'''
