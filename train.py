@@ -36,7 +36,7 @@ def train_gbr(X_train, X_test, y_train, y_test):
     gbr = GradientBoostingRegressor()
     gbr.fit(X_train, y_train)
 
-    joblib.dump(gbr, 'model/gbr_model.joblib')
+    joblib.dump(gbr, 'models/gbr_model.joblib')
 
     y_pred = gbr.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
@@ -63,7 +63,7 @@ def train_dtr(X_train, X_test, y_train, y_test):
 
     pipeline.fit(X_train, y_train)
 
-    joblib.dump(pipeline, 'model/dtr_model.joblib')
+    joblib.dump(pipeline, 'models/dtr_model.joblib')
 
     y_pred = pipeline.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
@@ -90,7 +90,7 @@ def train_rfr(X_train, X_test, y_train, y_test):
 
     pipeline.fit(X_train, y_train)
 
-    joblib.dump(pipeline, 'model/rfr_model.joblib')
+    joblib.dump(pipeline, 'models/rfr_model.joblib')
 
     y_pred = pipeline.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
@@ -103,7 +103,7 @@ def train_rfr(X_train, X_test, y_train, y_test):
 def train_test_save_lasso(X_train, X_test, y_train, y_test):
     model = Lasso()
     model.fit(X_train, y_train)
-    joblib.dump(model, 'model/lasso_model.pkl')
+    joblib.dump(model, 'models/lasso_model.pkl')
     y_pred = model.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
@@ -113,7 +113,7 @@ def train_test_save_lasso(X_train, X_test, y_train, y_test):
 def train_test_save_ridge(X_train, X_test, y_train, y_test):
     model = Ridge()
     model.fit(X_train, y_train)
-    joblib.dump(model, 'model/ridge_model.pkl')
+    joblib.dump(model, 'models/ridge_model.pkl')
     y_pred = model.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
@@ -172,7 +172,7 @@ def train_ann(X_train, X_test, y_train, y_test, save_path):
     model = MLPRegressor(hidden_layer_sizes=(12,), activation='relu',
                          solver='lbfgs', learning_rate_init=0.001, alpha=0.001)
     pipeline = Pipeline(steps=[('preprocessor', preprocessor),
-                               ('model', model)])
+                               ('models', model)])
 
     # Train the pipeline on the training data
     pipeline.fit(X_train, y_train)
@@ -225,21 +225,24 @@ def train_models(df, x_cols, y_col):
     model_types = ['svr', 'ann', 'gbr', 'dtr', 'rfr']
     model_times = {model_type: [] for model_type in model_types}
 
+    best_params = {model_type: None for model_type in model_types}
+    best_combinations = {model_type: None for model_type in model_types}
+
     for combo in combination:
         print(f"Training model with columns: {combo}")
         X_train_combo = X_train[combo]
         X_test_combo = X_test[combo]
 
-        y_train_combo = y_train[combo]
-        y_test_combo = y_test[combo]
+        y_train_combo = y_train
+        y_test_combo = y_test
 
         # Train and time each model
         eval_params = {}
         for model_type in model_types:
             start_time = time.time()
             if model_type == 'svr':
-                eval_params[model_type] = train_test_save_support_vector_regression(X_train_combo, X_test, y_train,
-                                                                                    y_test_combo)
+                eval_params[model_type] = \
+                    train_test_save_support_vector_regression(X_train_combo, X_test_combo, y_train_combo, y_test_combo)
             elif model_type == 'ann':
                 eval_params[model_type] = train_ann(X_train_combo, X_test_combo, y_train_combo, y_test_combo,
                                                     'models/trained_model.joblib')
@@ -252,6 +255,11 @@ def train_models(df, x_cols, y_col):
             end_time = time.time()
             model_times[model_type].append(end_time - start_time)
 
+            # Check if it's the best model for this model type
+            if 'metric' in eval_params[model_type] and eval_params[model_type]['metric'] > best_params[model_type]:
+                best_params[model_type] = eval_params[model_type]['metric']
+                best_combinations[model_type] = combo
+
         # Save the evaluation parameters for this combination
         eval_dict = {'columns': combo, 'eval_params': eval_params}
         eval_list.append(eval_dict)
@@ -263,5 +271,18 @@ def train_models(df, x_cols, y_col):
     avg_times = {model_type: np.mean(model_times[model_type]) for model_type in model_types}
     df_times = pd.DataFrame.from_dict(avg_times, orient='index', columns=['average_time'])
 
-    # Return the evaluation metrics DataFrame and the model time DataFrame
-    return df_eval, df_times
+    # Create DataFrames for best model parameters and combinations
+    df_best_params = pd.DataFrame.from_dict(best_params, orient='index', columns=['best_param'])
+    df_best_combinations = pd.DataFrame.from_dict(best_combinations, orient='index', columns=['best_combination'])
+
+    # Save the DataFrames as CSV files
+    df_eval.to_csv('data/evaluation_metrics.csv', index=False)
+    df_times.to_csv('data/model_times.csv', index=False)
+    df_best_params.to_csv('data/best_model_params.csv', index=False)
+    df_best_combinations.to_csv('data/best_model_combinations.csv', index=False)
+
+    # Return the evaluation metrics DataFrame, the model time DataFrame, best model parameters DataFrame,
+    # and best combinations DataFrame
+    return df_eval, df_times, df_best_params, df_best_combinations
+
+
