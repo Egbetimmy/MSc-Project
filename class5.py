@@ -5,22 +5,25 @@ import pandas as pd
 from sklearn.metrics import r2_score
 import joblib
 
+import pandas as pd
+import numpy as np
+
 
 def calculate_r2(actual_values, predicted_values):
     """
-    Calculates R-squared values for multiple predicted value columns given an actual value column.
+    Calculates R-squared value given actual and predicted values.
 
     Parameters
     ----------
     actual_values : pandas.Series
         A series containing the actual values.
     predicted_values : pandas.DataFrame
-        A DataFrame containing the predicted value columns.
+        A DataFrame containing the predicted values for each model.
 
     Returns
     -------
-    dict
-        A dictionary containing the R-squared values for each predicted value column.
+    pandas.DataFrame
+        A DataFrame containing the R-squared values for each model.
     """
     r2_values = {}
     for column in predicted_values.columns:
@@ -29,7 +32,9 @@ def calculate_r2(actual_values, predicted_values):
         ss_residual = np.sum((actual_values - predicted_values[column]) ** 2)
         r2 = 1 - (ss_residual / ss_total)
         r2_values[column] = r2
-    return r2_values
+
+    df_r2 = pd.DataFrame(r2_values.items(), columns=['model', 'R-squared'])
+    return df_r2
 
 
 def evaluate_models(models, model_names, new_data, target):
